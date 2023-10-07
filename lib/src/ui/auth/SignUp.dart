@@ -10,11 +10,11 @@ class ScreenSignUp extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Center(
-            child: Text('Is this... the cart?')
+            child: Text('ScreenSignUp')
         ),
         Center(
             child: ElevatedButton(
-              child: Text('Go back'),
+              child: const Text('Go back'),
               onPressed: () {
                 ctx.go('/');
               },

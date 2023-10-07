@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ScreenSignUpSuccess extends StatelessWidget {
-  ScreenSignUpSuccess({super.key});
+  const ScreenSignUpSuccess({super.key});
 
   @override
   Widget build (BuildContext ctx) {
@@ -14,7 +14,7 @@ class ScreenSignUpSuccess extends StatelessWidget {
         ),
         Center(
             child: ElevatedButton(
-              child: Text('Go back'),
+              child: const Text('Go back'),
               onPressed: () {
                 ctx.go('/');
               },

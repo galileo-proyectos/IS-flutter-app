@@ -10,7 +10,7 @@ class ScreenCartCompleted extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Center(
-            child: Text('ScreenAccountDetail')
+            child: Text('ScreenCartCompleted')
         ),
         Center(
             child: ElevatedButton(

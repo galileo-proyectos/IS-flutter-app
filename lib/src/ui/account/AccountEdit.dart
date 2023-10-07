@@ -10,7 +10,7 @@ class ScreenAccountEdit extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Center(
-            child: Text('ScreenAccountDetail')
+            child: Text('ScreenAccountEdit')
         ),
         Center(
             child: ElevatedButton(

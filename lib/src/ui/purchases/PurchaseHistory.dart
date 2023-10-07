@@ -10,7 +10,7 @@ class ScreenPurchaseHistory extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Center(
-            child: Text('Is this... the cart?')
+            child: Text('ScreenPurchaseHistory')
         ),
         Center(
             child: ElevatedButton(
