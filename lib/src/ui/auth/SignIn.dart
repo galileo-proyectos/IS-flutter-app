@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/cubits/CubitEmail.dart';
 
 class ScreenSignIn extends StatelessWidget {
   const ScreenSignIn({super.key});
@@ -14,7 +16,7 @@ class ScreenSignIn extends StatelessWidget {
         ),
         Center(
             child: ElevatedButton(
-              child: const Text('Go back'),
+              child: Text(ctx.read<CubitEmail>().getEmail()),
               onPressed: () {
                 ctx.go('/');
               },

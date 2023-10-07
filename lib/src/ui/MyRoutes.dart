@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/cubits/CubitCart.dart';
+import 'package:multi_screen_app/src/cubits/CubitCategoryList.dart';
+import 'package:multi_screen_app/src/cubits/CubitEmail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountDetail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountEdit.dart';
 import 'package:multi_screen_app/src/ui/auth/SignIn.dart';
@@ -19,8 +23,10 @@ import 'package:multi_screen_app/src/ui/purchases/PurchaseHistory.dart';
 
 class MyRoutes {
 
+  static const _initialLocation = '/';
+
   static final GoRouter _routes = GoRouter(
-    initialLocation: '/',
+    initialLocation: _initialLocation,
     debugLogDiagnostics: true,
     routes: [
       ShellRoute(
@@ -28,44 +34,48 @@ class MyRoutes {
         routes: [
           GoRoute(
             path: '/user/details',
-            builder: (context, state) => ScreenAccountDetail(),
+            builder: (context, state) => ScreenAccountDetail()
           ),
           GoRoute(
             path: '/user/edit',
-            builder: (context, state) => ScreenAccountEdit(),
+            builder: (context, state) => ScreenAccountEdit()
           ),
           GoRoute(
             path: '/cart',
-            builder: (context, state) => ScreenCart(),
+            builder: (context, state) => ScreenCart()
           ),
           GoRoute(
             path: '/cart/completed',
-            builder: (context, state) => ScreenCartCompleted(),
+            builder: (context, state) => ScreenCartCompleted()
           ),
           GoRoute(
             path: '/cart/pay',
-            builder: (context, state) => ScreenPay(),
+            builder: (context, state) => ScreenPay()
           ),
           GoRoute(
             path: '/',
-            builder: (context, state) => ScreenHome(),
+            builder: (context, state) => ScreenHome()
           ),
           GoRoute(
             path: '/products/:code/code',
-            builder: (context, state) => ScreenProductDetail(),
+            builder: (context, state) => ScreenProductDetail()
           ),
           GoRoute(
             path: '/products',
-            builder: (context, state) => ScreenProductList(),
+            builder: (context, state) => ScreenProductList()
           ),
           GoRoute(
             path: '/purchases/:id/id',
-            builder: (context, state) => ScreenPurchaseDetail(),
+            builder: (context, state) => ScreenPurchaseDetail()
           ),
           GoRoute(
             path: '/purchases',
-            builder: (context, state) => ScreenPurchaseHistory(),
+            builder: (context, state) => ScreenPurchaseHistory()
           ),
+          GoRoute(
+              path: '/scanner',
+              builder: (context, state) => ScreenScanner()
+          )
         ]
       ),
       ShellRoute(
@@ -89,15 +99,6 @@ class MyRoutes {
           )
         ]
       ),
-      ShellRoute(
-        builder: _blanckLayout,
-        routes: [
-          GoRoute(
-              path: '/scanner',
-              builder: (context, state) => ScreenScanner()
-          ),
-        ]
-      )
     ]
   );
 
@@ -106,25 +107,33 @@ class MyRoutes {
       appBar: AppBar(
         title: Text('This is my app bar'),
       ),
-      body: child
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<CubitCart>(
+              create: (BuildContext ctx) => CubitCart()
+          ),
+          BlocProvider<CubitCategoryList>(
+              create: (BuildContext ctx) => CubitCategoryList()
+          )
+        ],
+        child: child
+      )
     );
   }
 
   static Widget _authLayout (BuildContext context, GoRouterState state, Widget child) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('This is my app bar'),
-        ),
-        body: child
-    );
-  }
-
-  static Widget _blanckLayout (BuildContext context, GoRouterState state, Widget child) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('This is my app bar'),
-        ),
-        body: child
+      appBar: AppBar(
+        title: Text('This is my app bar'),
+      ),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (BuildContext ctx) => CubitEmail(),
+          )
+        ],
+        child: child
+      )
     );
   }
 
