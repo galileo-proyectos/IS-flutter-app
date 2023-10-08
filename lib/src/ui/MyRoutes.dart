@@ -20,6 +20,7 @@ import 'package:multi_screen_app/src/ui/products/ProductList.dart';
 import 'package:multi_screen_app/src/ui/cart/pay.dart';
 import 'package:multi_screen_app/src/ui/purchases/PurchaseDetail.dart';
 import 'package:multi_screen_app/src/ui/purchases/PurchaseHistory.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetAppBar.dart';
 
 class MyRoutes {
 
@@ -104,9 +105,7 @@ class MyRoutes {
 
   static Widget _mainLayout (BuildContext context, GoRouterState state, Widget child) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('This is my app bar'),
-      ),
+      appBar: WidgetAppBar(),
       body: MultiBlocProvider(
         providers: [
           BlocProvider<CubitCart>(
