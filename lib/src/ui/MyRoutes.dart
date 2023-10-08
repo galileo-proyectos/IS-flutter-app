@@ -105,7 +105,7 @@ class MyRoutes {
 
   static Widget _mainLayout (BuildContext context, GoRouterState state, Widget child) {
     return Scaffold(
-      appBar: WidgetAppBar(),
+      appBar: const WidgetAppBar(),
       body: MultiBlocProvider(
         providers: [
           BlocProvider<CubitCart>(
