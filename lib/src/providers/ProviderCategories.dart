@@ -10,7 +10,7 @@ import 'package:multi_screen_app/src/models/ModelCategory.dart';
 
 class ProviderCategories extends ChangeNotifier {
   bool _loading = false;
-  ModelUser _user;
+  final ModelUser _user;
   List<ModelCategory> _list = [];
 
   ProviderCategories(BuildContext ctx): _user = Provider.of<ModelUser>(ctx, listen: false) {
@@ -42,6 +42,7 @@ class ProviderCategories extends ChangeNotifier {
   }
 
   UnmodifiableListView<ModelCategory> get list => UnmodifiableListView(_list);
+
   bool isLoading () {
     return _loading;
   }

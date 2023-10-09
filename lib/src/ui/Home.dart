@@ -18,25 +18,32 @@ class _ScreenHomeState extends State<ScreenHome> {
 
   @override
   Widget build (BuildContext ctx) {
-    return Consumer<ProviderCategories>(
-        builder: (ctx, dataCategories, build) {
-          return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                    child: Text('categories\' length is : ${dataCategories.list.length}')
-                ),
-                Center(
-                    child: ElevatedButton(
-                      child: Text('fetch'),
-                      onPressed: () {
-
-                      },
-                    )
-                )
-              ]
-          );
-        }
+    // CHANGE YOUR CODE HERE
+    // you may want to place the hole structure of this screen here,
+    // but first go to check above messages
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          // Because of consumer when new data is available
+          // the widget will automatically be refreshed.
+          // This piece is important, modify it but do not remove.
+          child: Consumer<ProviderCategories>(
+            builder: (ctx, data, child) {
+              if (data.isLoading()) {
+                // here you can show a loading status
+                // CHANGE YOUR CODE HERE
+                return Text('loading');
+              } else {
+                // here you can construct your category list
+                // to finished just return the widget u want to show
+                // CHANGE YOUR CODE HERE
+                return Text('fetched!');
+              }
+            }
+          )
+        )
+      ]
     );
   }
 }
