@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:collection';
+import 'package:multi_screen_app/src/providers/ProviderUser.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +14,9 @@ class ProviderCategories extends ChangeNotifier {
   final ModelUser _user;
   List<ModelCategory> _list = [];
 
-  ProviderCategories(BuildContext ctx): _user = Provider.of<ModelUser>(ctx, listen: false) {
+  ProviderCategories(BuildContext ctx):
+        _user = Provider.of<ProviderUser>(ctx, listen: false).user
+  {
     if (!_user.isLoggedIn()) {
       throw ArgumentError.notNull('user');
     }
@@ -26,7 +29,7 @@ class ProviderCategories extends ChangeNotifier {
       // fetch
       final http.Response httpResult = await http.get(
           Uri.parse('${BaseAPI.routes['categories']}'),
-          headers: BaseAPI.headers(_user.token));
+          headers: BaseAPI.authHeaders(_user.token));
 
       // parse http result
       final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
