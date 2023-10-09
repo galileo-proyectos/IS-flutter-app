@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:multi_screen_app/src/cubits/CubitUser.dart';
+import 'package:multi_screen_app/src/models/ModelUser.dart';
 import 'package:multi_screen_app/src/ui/MyRoutes.dart';
+import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
   // GoRouter configuration
@@ -9,15 +9,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build (BuildContext ctx) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<CubitUser>(
-          lazy: false,
-          create: (BuildContext ctx) => CubitUser(CubitUser.unauthenticatedUser)
-        ),
-      ],
+    return ChangeNotifierProvider<ModelUser>(
+      create: (ctx) => ModelUser.notSignedIn(),
       child: MaterialApp.router(
-        routerConfig: MyRoutes.getRoutes(),
+        routerConfig: MyRoutes.getRoutes()
       )
     );
   }

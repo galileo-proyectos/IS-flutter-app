@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:multi_screen_app/src/cubits/CubitCart.dart';
-import 'package:multi_screen_app/src/cubits/CubitCategoryList.dart';
-import 'package:multi_screen_app/src/cubits/CubitEmail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountDetail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountEdit.dart';
 import 'package:multi_screen_app/src/ui/auth/SignIn.dart';
@@ -106,17 +102,7 @@ class MyRoutes {
   static Widget _mainLayout (BuildContext context, GoRouterState state, Widget child) {
     return Scaffold(
       appBar: const WidgetAppBar(),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider<CubitCart>(
-              create: (BuildContext ctx) => CubitCart()
-          ),
-          BlocProvider<CubitCategoryList>(
-              create: (BuildContext ctx) => CubitCategoryList()
-          )
-        ],
-        child: child
-      )
+      body: child
     );
   }
 
@@ -125,14 +111,7 @@ class MyRoutes {
       appBar: AppBar(
         title: Text('This is my app bar'),
       ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (BuildContext ctx) => CubitEmail(),
-          )
-        ],
-        child: child
-      )
+      body: child
     );
   }
 
