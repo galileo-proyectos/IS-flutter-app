@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
 import 'package:multi_screen_app/src/ui/account/AccountDetail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountEdit.dart';
 import 'package:multi_screen_app/src/ui/auth/SignIn.dart';
@@ -17,9 +18,9 @@ import 'package:multi_screen_app/src/ui/cart/pay.dart';
 import 'package:multi_screen_app/src/ui/purchases/PurchaseDetail.dart';
 import 'package:multi_screen_app/src/ui/purchases/PurchaseHistory.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetAppBar.dart';
+import 'package:provider/provider.dart';
 
 class MyRoutes {
-
   static const _initialLocation = '/';
 
   static final GoRouter _routes = GoRouter(
@@ -95,14 +96,21 @@ class MyRoutes {
               builder: (context, state) => ScreenSignUpSuccess()
           )
         ]
-      ),
+      )
     ]
   );
 
   static Widget _mainLayout (BuildContext context, GoRouterState state, Widget child) {
-    return Scaffold(
-      appBar: const WidgetAppBar(),
-      body: child
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => ProviderCategories(ctx)
+        )
+      ],
+      child: Scaffold(
+          appBar: const WidgetAppBar(),
+          body: child
+      )
     );
   }
 
