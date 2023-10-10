@@ -51,6 +51,25 @@ class ProviderUser extends ChangeNotifier {
     _loading = false;
     return response.message;
   }
+  Future<String?> recoveryPassword (String email) async {
+    _loading = true;
+
+    // push data
+    final http.Response httpResult = await http.post(
+        Uri.parse(BaseAPI.routes['password-recovery']!),
+        headers: BaseAPI.headers,
+        body: _ModelRecoveryPassword(email).toJSON()
+    );
+
+    // evaluate response
+    final response = ApiResponse.fromJson(jsonDecode(httpResult.body));
+    if (response.isSuccess()) {
+      return null;
+    }
+
+    _loading = false;
+    return response.message;
+  }
 
   bool isLoading () => _loading;
   ModelUser get user => _user;
@@ -87,6 +106,18 @@ class _ModelSignUp {
       'phone': _phone,
       'acceptPromotions': _acceptPromotions,
       'acceptTerms': true
+    });
+  }
+}
+
+class _ModelRecoveryPassword {
+  final String _email;
+
+  _ModelRecoveryPassword(this._email);
+
+  String toJSON () {
+    return jsonEncode(<String, dynamic> {
+      'email': _email
     });
   }
 }

@@ -7,6 +7,7 @@ import 'package:multi_screen_app/src/ui/auth/SignIn.dart';
 import 'package:multi_screen_app/src/ui/auth/SignInSuccess.dart';
 import 'package:multi_screen_app/src/ui/auth/SignUp.dart';
 import 'package:multi_screen_app/src/ui/auth/SignUpSuccess.dart';
+import 'package:multi_screen_app/src/ui/auth/UserRecovery.dart';
 
 import 'package:multi_screen_app/src/ui/cart/Cart.dart';
 import 'package:multi_screen_app/src/ui/cart/CartCompleted.dart';
@@ -21,7 +22,7 @@ import 'package:multi_screen_app/src/ui/widgets/WidgetAppBar.dart';
 import 'package:provider/provider.dart';
 
 class MyRoutes {
-  static const _initialLocation = '/auth/signUp';
+  static const _initialLocation = '/auth/recovery-password';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
@@ -94,6 +95,10 @@ class MyRoutes {
           GoRoute(
               path: '/auth/signUp/success',
               builder: (context, state) => ScreenSignUpSuccess()
+          ),
+          GoRoute(
+              path: '/auth/recovery-password',
+              builder: (context, state) => ScreenUserRecovery()
           )
         ]
       )

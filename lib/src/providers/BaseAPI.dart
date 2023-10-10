@@ -9,7 +9,8 @@ class BaseAPI {
 
   static const Map<String, String> routes = {
     'auth': '$_api/auth',
-    'categories': '$_api/aisles'
+    'categories': '$_api/aisles',
+    'password-recovery': '$_api/password-recovery/send-email'
   };
 
   static Map<String, String> authHeaders (String token) {
