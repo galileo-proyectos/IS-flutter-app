@@ -21,7 +21,7 @@ import 'package:multi_screen_app/src/ui/widgets/WidgetAppBar.dart';
 import 'package:provider/provider.dart';
 
 class MyRoutes {
-  static const _initialLocation = '/auth/signin';
+  static const _initialLocation = '/auth/signUp';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
@@ -80,7 +80,7 @@ class MyRoutes {
         builder: _authLayout,
         routes: [
           GoRoute(
-            path: '/auth/signin',
+            path: '/auth/signIn',
             builder: (context, state) => ScreenSignIn()
           ),
           GoRoute(

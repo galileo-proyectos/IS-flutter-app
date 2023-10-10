@@ -15,7 +15,7 @@ class ProviderUser extends ChangeNotifier {
   Future<String?> signIn (String email, String password) async {
     _loading = true;
 
-    // fetch
+    // push data
     final http.Response httpResult = await http.post(
         Uri.parse('${BaseAPI.routes['auth']}/signin'),
         headers: BaseAPI.headers,
@@ -26,6 +26,25 @@ class ProviderUser extends ChangeNotifier {
     final response = ApiResponse.fromJson(jsonDecode(httpResult.body));
     if (response.isSuccess()) {
       _user = ModelUser(response.results);
+      return null;
+    }
+
+    _loading = false;
+    return response.message;
+  }
+  Future<String?> signUp (String email, String password, DateTime? bornDate, String? phone, bool acceptPromotions) async {
+    _loading = true;
+
+    // push data
+    final http.Response httpResult = await http.post(
+        Uri.parse('${BaseAPI.routes['auth']}/signup'),
+        headers: BaseAPI.headers,
+        body: _ModelSignUp(email, password, bornDate, phone, acceptPromotions).toJSON()
+    );
+
+    // evaluate response
+    final response = ApiResponse.fromJson(jsonDecode(httpResult.body));
+    if (response.isSuccess()) {
       return null;
     }
 
@@ -47,6 +66,27 @@ class _ModelSignIn {
     return jsonEncode(<String, String> {
       'email': _email,
       'password': _password
+    });
+  }
+}
+
+class _ModelSignUp {
+  final String _email;
+  final String _password;
+  final DateTime? _bornDate;
+  final String? _phone;
+  final bool _acceptPromotions;
+
+  _ModelSignUp(this._email, this._password, this._bornDate, this._phone, this._acceptPromotions);
+
+  String toJSON () {
+    return jsonEncode(<String, dynamic> {
+      'email': _email,
+      'password': _password,
+      'bornDate': _bornDate?.millisecond,
+      'phone': _phone,
+      'acceptPromotions': _acceptPromotions,
+      'acceptTerms': true
     });
   }
 }
