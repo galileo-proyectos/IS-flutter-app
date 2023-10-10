@@ -15,7 +15,5 @@ class ModelCategory {
     urlImage = json['urlImage'];
 
   @override
-  String toString () {
-    return '( $id, $name, $urlImage )';
-  }
+  String toString () => '( $id, $name, $urlImage )';
 }

@@ -29,16 +29,24 @@ class _ScreenHomeState extends State<ScreenHome> {
           // the widget will automatically be refreshed.
           // This piece is important, modify it but do not remove.
           child: Consumer<ProviderCategories>(
-            builder: (ctx, data, child) {
-              if (data.isLoading()) {
+            builder: (ctx, provider, child) {
+              if (provider.isLoading()) {
                 // here you can show a loading status
                 // CHANGE YOUR CODE HERE
-                return Text('loading');
+                return Text('loading...');
               } else {
                 // here you can construct your category list
                 // to finished just return the widget u want to show
                 // CHANGE YOUR CODE HERE
-                return Text('fetched!');
+                List<Widget> listdewidgets = [];
+
+                provider.list.forEach((category) {
+                  listdewidgets.add(Text(category.name));
+                });
+
+                return Column(
+                  children: listdewidgets
+                );
               }
             }
           )

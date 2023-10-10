@@ -13,7 +13,8 @@ class ModelProduct {
   final int aisleId;
   final String? imageURL;
 
-  String productToString(){
+  @override
+  String toString (){
     return "Q"+ this.price.toString();
   }
 }

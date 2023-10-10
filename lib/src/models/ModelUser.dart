@@ -1,25 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
-class ModelUser extends ChangeNotifier {
-  String _token;
+class ModelUser {
+  final String _token;
 
-  ModelUser.notSignedIn () : _token = '';
+  ModelUser.notSignedIn(): _token = ''; // named constructor
   ModelUser(this._token);
 
   String get token => _token;
 
-  bool isLoggedIn () {
-    return _token.isNotEmpty;
-  }
-
-  void signIn (ModelUser user) {
-    _token = user.token;
-    notifyListeners();
-  }
-  void signOut () {
-    _token = '';
-    notifyListeners();
-  }
+  bool isLoggedIn () => _token.isNotEmpty;
 
   @override
   String toString () => '(USER)[\n  token: $_token\n]';

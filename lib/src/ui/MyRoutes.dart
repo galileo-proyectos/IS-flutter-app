@@ -103,7 +103,7 @@ class MyRoutes {
   static Widget _mainLayout (BuildContext context, GoRouterState state, Widget child) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
+        ChangeNotifierProvider<ProviderCategories>(
           create: (ctx) => ProviderCategories(ctx)
         )
       ],

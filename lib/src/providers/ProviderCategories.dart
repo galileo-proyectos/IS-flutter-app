@@ -22,7 +22,7 @@ class ProviderCategories extends ChangeNotifier {
     }
   }
 
-  void fetchCategories () async {
+  Future<void> fetchCategories () async {
     if (list.isEmpty) {
       _loading = true;
 
@@ -45,8 +45,5 @@ class ProviderCategories extends ChangeNotifier {
   }
 
   UnmodifiableListView<ModelCategory> get list => UnmodifiableListView(_list);
-
-  bool isLoading () {
-    return _loading;
-  }
+  bool isLoading () => _loading;
 }
