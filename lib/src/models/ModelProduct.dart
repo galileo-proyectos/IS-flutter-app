@@ -1,20 +1,34 @@
-class ModelProduct {
-  ModelProduct({
-    required this.name,
-    required this.price,
-    required this.description,
-    required this.aisleId,
-    this.imageURL
-  });
+import 'dart:ffi';
 
-  final String name;
-  final double price;
-  final String description;
-  final int aisleId;
-  final String? imageURL;
+class ModelProduct {
+  ModelProduct.fromJson(Map<String, dynamic> json) :
+        _code = json['code'],
+        _name = json['name'],
+        _description = json['description'],
+        _price = json['price'].toDouble(),
+        _stock = json['stock'].toDouble(),
+        _imageURL = json['imageURL'],
+        _brandId = json['brandId'],
+        _aisleId = json['aisleId'];
+
+  final String _code;
+  final String _name;
+  final String? _description;
+  final double _price;
+  final double _stock;
+  final String? _imageURL;
+  final int _brandId;
+  final int _aisleId;
+
+  String get code => _code;
+  String get name => _name;
+  String? get description => _description;
+  double get price => _price;
+  double get stock => _stock;
+  String? get imageURL => _imageURL;
+  int get brandId => _brandId;
+  int get aisleId => _aisleId;
 
   @override
-  String toString (){
-    return "Q"+ this.price.toString();
-  }
+  String toString () => '($_name:Q$_price)';
 }
