@@ -57,7 +57,7 @@ class MyRoutes {
             builder: (context, state) => ScreenHome()
           ),
           GoRoute(
-            path: '/products/:code/code',
+            path: '/products/details',
             builder: (context, state) => ScreenProductDetail()
           ),
           GoRoute(

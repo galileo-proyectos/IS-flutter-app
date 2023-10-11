@@ -11,8 +11,11 @@ import 'package:multi_screen_app/src/providers/BaseAPI.dart';
 
 class ProviderProducts extends ChangeNotifier {
   bool _loading = false;
+
   final ModelUser _user;
+
   List<ModelProduct> _list = [];
+  ModelProduct? _selectedProduct;
 
   ProviderProducts(BuildContext ctx):
         _user = Provider.of<ProviderUser>(ctx, listen: false).user
@@ -43,6 +46,16 @@ class ProviderProducts extends ChangeNotifier {
     } else {
       print('[Products]: Using cached data');
     }
+  }
+
+  ModelProduct get selectedProduct {
+    if (_selectedProduct != null) {
+      return _selectedProduct!;
+    }
+    throw ArgumentError('not selected product found');
+  }
+  void selectProduct (ModelProduct product) {
+    _selectedProduct = product;
   }
 
   UnmodifiableListView<ModelProduct> get list => UnmodifiableListView(_list);

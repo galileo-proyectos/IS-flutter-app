@@ -41,8 +41,20 @@ class _ScreenProductListState extends State<ScreenProductList> {
                 // CHANGE YOUR CODE HERE
                 List<Widget> listdewidgets = [];
 
+                // [pending]: how we suppose to handle thousands of products???
                 for (final product in provider.list) {
-                  listdewidgets.add(Text(product.name));
+                  listdewidgets.add(ElevatedButton(
+                    onPressed: () {
+                      // CHANGE YOR CODE HERE
+                      // Alessandro implement this wierd approach thinking that a supermarket
+                      // will have thousands of products... this is faster :D
+
+                      // first you have to selected the product
+                      Provider.of<ProviderProducts>(context, listen: false).selectProduct(product);
+                      // the you can show it's details.
+                      ctx.go('/products/details');
+                    },
+                    child: Text(product.name)));
                 }
 
                 return Column(
