@@ -22,7 +22,7 @@ import 'package:multi_screen_app/src/ui/widgets/WidgetAppBar.dart';
 import 'package:provider/provider.dart';
 
 class MyRoutes {
-  static const _initialLocation = '/auth/recovery-password';
+  static const _initialLocation = '/auth/signIn';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
@@ -121,9 +121,7 @@ class MyRoutes {
 
   static Widget _authLayout (BuildContext context, GoRouterState state, Widget child) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('This is my app bar'),
-      ),
+
       body: child
     );
   }
