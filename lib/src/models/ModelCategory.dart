@@ -1,7 +1,7 @@
 class ModelCategory {
    final int id;
    final String name;
-   final String? urlImage;
+   final String urlImage;
 
   ModelCategory({
     required this.id,

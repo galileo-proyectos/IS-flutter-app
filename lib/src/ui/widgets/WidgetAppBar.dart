@@ -12,10 +12,13 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: const Color(0xFFFFFFFF),
       toolbarHeight: 200,
       title: Center(
-        child: Image.asset(
-          "lib/src/assets/logo-horizontal-letras.png",
-          width: 166,
-          height: 40
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Image.asset(
+            "lib/src/assets/logo-horizontal-letras.png",
+            width: 166,
+            height: 40
+          ),
         )
       )
     );

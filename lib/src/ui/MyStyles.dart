@@ -35,6 +35,10 @@ class MyStyles {
   static const TextStyle hintText = TextStyle(color: Color(0xFF9E9E9E));
   static ButtonStyle buttonStyle = ElevatedButton.styleFrom(
     backgroundColor: const Color(0xFF592D8C),
-    minimumSize: const Size(120, 50), // background
+    minimumSize: const Size(120, 50),
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8)
+    ),
+    // background
   );
 }

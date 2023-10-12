@@ -5,7 +5,7 @@ import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/account/AccountDetail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountEdit.dart';
 import 'package:multi_screen_app/src/ui/auth/SignIn.dart';
-import 'package:multi_screen_app/src/ui/auth/SignInSuccess.dart';
+import 'package:multi_screen_app/src/ui/auth/UserRecoverySuccess.dart';
 import 'package:multi_screen_app/src/ui/auth/SignUp.dart';
 import 'package:multi_screen_app/src/ui/auth/SignUpSuccess.dart';
 import 'package:multi_screen_app/src/ui/auth/UserRecovery.dart';
@@ -87,8 +87,8 @@ class MyRoutes {
             builder: (context, state) => ScreenSignIn()
           ),
           GoRoute(
-              path: '/auth/signIn/success',
-              builder: (context, state) => ScreenSignInSuccess()
+              path: '/auth/recovery-password/success',
+              builder: (context, state) => ScreenUserRecoverySuccess()
           ),
           GoRoute(
               path: '/auth/signUp',
