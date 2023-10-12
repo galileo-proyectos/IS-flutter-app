@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
+import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/account/AccountDetail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountEdit.dart';
 import 'package:multi_screen_app/src/ui/auth/SignIn.dart';
@@ -22,7 +23,8 @@ import 'package:multi_screen_app/src/ui/widgets/WidgetAppBar.dart';
 import 'package:provider/provider.dart';
 
 class MyRoutes {
-  static const _initialLocation = '/auth/signIn';
+
+  static const _initialLocation = '/';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
@@ -56,7 +58,7 @@ class MyRoutes {
             builder: (context, state) => ScreenHome()
           ),
           GoRoute(
-            path: '/products/:code/code',
+            path: '/products/details',
             builder: (context, state) => ScreenProductDetail()
           ),
           GoRoute(
@@ -110,6 +112,9 @@ class MyRoutes {
       providers: [
         ChangeNotifierProvider<ProviderCategories>(
           create: (ctx) => ProviderCategories(ctx)
+        ),
+        ChangeNotifierProvider<ProviderProducts>(
+            create: (ctx) => ProviderProducts(ctx)
         )
       ],
       child: Scaffold(

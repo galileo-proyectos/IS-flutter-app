@@ -1,10 +1,9 @@
-import 'dart:convert';
-
+import 'package:multi_screen_app/src/models/ApiResponse.dart';
+import 'package:multi_screen_app/src/providers/BaseAPI.dart';
+import 'package:multi_screen_app/src/models/ModelUser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:multi_screen_app/src/models/ApiResponse.dart';
-import 'package:multi_screen_app/src/models/ModelUser.dart';
-import 'package:multi_screen_app/src/providers/BaseAPI.dart';
+import 'dart:convert';
 
 class ProviderUser extends ChangeNotifier {
   bool _loading = false;
