@@ -13,7 +13,8 @@ class ScreenProductList extends StatefulWidget {
 }
 
 class _ScreenProductListState extends State<ScreenProductList> {
-  final ModelProduct product = ModelProduct("");
+  late final ModelProduct product;
+  
   @override
   void initState () {
     Provider.of<ProviderProducts>(context, listen: false).fetchProducts();
@@ -24,7 +25,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        WidgetProduct(),
+        WidgetProduct(producto: product),
         const Center(
             child: Text('ScreenProductList')
         ),

@@ -6,10 +6,10 @@ import 'package:http/http.dart' as http;
 import 'dart:collection';
 import 'dart:convert';
 
-class ProviderCategories extends DefaultProvider {
+class ProviderPromotions extends DefaultProvider {
   List<ModelPromotion> _list = [];
 
-  ProviderCategories(super.ctx);
+  ProviderPromotions(super.ctx);
 
   Future<void> fetchPromotions () async {
     if (list.isEmpty) {

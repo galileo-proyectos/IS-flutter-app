@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
+import 'package:multi_screen_app/src/providers/ProviderPromotions.dart';
 import 'package:multi_screen_app/src/ui/account/AccountDetail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountEdit.dart';
 import 'package:multi_screen_app/src/ui/auth/SignIn.dart';
@@ -54,8 +55,11 @@ class MyRoutes {
             builder: (context, state) => ScreenPay()
           ),
           GoRoute(
-            path: '/',
-            builder: (context, state) => ScreenHome()
+              path: '/',
+              builder: (context, state) => Provider(
+                create: (ctx) => ProviderPromotions(ctx),
+                child: ScreenHome(),
+              )
           ),
           GoRoute(
             path: '/products/details',

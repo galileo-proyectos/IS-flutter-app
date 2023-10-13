@@ -3,17 +3,15 @@ class ModelPromotion {
   final String name;
   final String description;
   final String couponCode;
-  final String urlImage;
-
-  ModelPromotion(this.id, this.name, this.description, this.couponCode, this.urlImage);
+  final String imageURL;
 
   ModelPromotion.fromJson(Map<String, dynamic> json) :
         id = json['id'],
         name = json['name'],
         description = json['description'],
         couponCode = json['couponCode'],
-        urlImage = json['urlImage'];
+        imageURL = json['imageURL'];
 
   @override
-  String toString () => 'Promo( $id, $name, $urlImage )';
+  String toString () => 'Promo( $id, $name, $imageURL )';
 }
