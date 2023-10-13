@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetProduct.dart';
 import 'package:provider/provider.dart';
 
 class ScreenProductList extends StatefulWidget {
@@ -12,6 +13,7 @@ class ScreenProductList extends StatefulWidget {
 }
 
 class _ScreenProductListState extends State<ScreenProductList> {
+  final ModelProduct product = ModelProduct("");
   @override
   void initState () {
     Provider.of<ProviderProducts>(context, listen: false).fetchProducts();
@@ -22,6 +24,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        WidgetProduct(),
         const Center(
             child: Text('ScreenProductList')
         ),
@@ -50,6 +53,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
                       // will have thousands of products... this is faster :D
 
                       // first you have to selected the product
+
                       Provider.of<ProviderProducts>(context, listen: false).selectProduct(product);
                       // the you can show it's details.
                       ctx.go('/products/details');

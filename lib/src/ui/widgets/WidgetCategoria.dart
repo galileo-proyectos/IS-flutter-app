@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class WidgetCategoria extends StatelessWidget {
   final String name;
   final String urlImg;
-  WidgetCategoria({super.key, required this.name,required  this.urlImg});
+  WidgetCategoria({super.key, required this.name,required this.urlImg});
 
   @override
   Widget build(BuildContext context) {

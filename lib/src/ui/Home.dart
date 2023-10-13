@@ -1,11 +1,12 @@
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetCategoria.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
-
   @override
   State<ScreenHome> createState() => _ScreenHomeState();
 }
@@ -16,24 +17,41 @@ class _ScreenHomeState extends State<ScreenHome> {
     // init categories
     Provider.of<ProviderCategories>(context, listen: false).fetchCategories();
   }
-
+  List imgList = [
+    "https://pbs.twimg.com/media/FOFIs5dXIAgxCOp.jpg:large",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_sQF818vkIirqThXQ9Mx217z2e7JoQ8oOYoX9hW5KPBS24P2M9SsBAEnrkwuUH1OfpEw&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUCA5enmMppvNfS80gXooultcOuz_9FHX8Yi_EEELJl8_YzH2baCeskcI-ozseqQGC6Bc&usqp=CAU"
+  ];
   @override
   Widget build(BuildContext ctx) {
     // CHANGE YOUR CODE HERE
     // you may want to place the hole structure of this screen here,
     // but first go to check above messages
     return SingleChildScrollView(
-        child: Container(
-      alignment: Alignment.topLeft,
-      width: double.infinity,
-      height: MediaQuery.of(context).size.height,
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[Color(0xFFFCFAFA),
-                Color(0xFFDACFE8)])),
-      child: Column(children: [
+        child: Column(children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          child: const Padding(
+            padding: EdgeInsets.only(top: 25, left: 25),
+            child: Text("Promociones", style: MyStyles.h3),
+          ),
+        ),
+          CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: true,
+              height: 400,
+              enlargeCenterPage: true,
+            ),
+            items: imgList
+                .map((item) => Container(
+                child: Center(
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Image.network(item,
+                          fit: BoxFit.cover, width: 270)),
+                )))
+                .toList(),
+          ),
         Container(
           alignment: Alignment.centerLeft,
           child: const Padding(
@@ -50,16 +68,20 @@ class _ScreenHomeState extends State<ScreenHome> {
             // here you can construct your category list
             // to finished just return the widget u want to show
             // CHANGE YOUR CODE HERE
-            List<Widget> listdewidgets = [];
+            List<WidgetCategoria> listdewidgets = [];
 
             provider.list.forEach((category) {
-              listdewidgets.add(Text(category.name));
+              listdewidgets.add(WidgetCategoria(name: category.name, urlImg: category.imageURL));
             });
 
             return Column(children: listdewidgets);
           }
         }),
+          const Padding(
+            padding: EdgeInsets.all(20),
+          )
+
       ]),
-    ));
+    );
   }
 }
