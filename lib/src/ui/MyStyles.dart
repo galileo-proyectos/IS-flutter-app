@@ -26,6 +26,8 @@ class MyStyles {
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
+  static const TextStyle price = TextStyle(
+      color: Color(0xFF686868), fontSize: 11, fontWeight: FontWeight.w500);
 
   static const TextStyle messageStyle =
       TextStyle(fontSize: 25, fontWeight: FontWeight.w400);
@@ -36,9 +38,13 @@ class MyStyles {
   static ButtonStyle buttonStyle = ElevatedButton.styleFrom(
     backgroundColor: const Color(0xFF592D8C),
     minimumSize: const Size(120, 50),
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8)
-    ),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    // background
+  );
+  static ButtonStyle smallButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: const Color(0xFF592D8C),
+    minimumSize: const Size(80, 15),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     // background
   );
 }

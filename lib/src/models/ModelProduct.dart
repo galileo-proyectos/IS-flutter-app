@@ -16,7 +16,7 @@ class ModelProduct {
   final String? _description;
   final double _price;
   final double _stock;
-  final String? _imageURL;
+  final String _imageURL;
   final int _brandId;
   final int _aisleId;
 
@@ -25,7 +25,7 @@ class ModelProduct {
   String? get description => _description;
   double get price => _price;
   double get stock => _stock;
-  String? get imageURL => _imageURL;
+  String get imageURL => _imageURL;
   int get brandId => _brandId;
   int get aisleId => _aisleId;
 
