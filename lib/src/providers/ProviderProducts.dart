@@ -12,27 +12,26 @@ class ProviderProducts extends DefaultProvider {
 
   ProviderProducts(super.ctx);
 
-  Future<void> fetchProducts () async {
-    if (list.isEmpty) {
-      onLoading();
+  Future<void> fetchProducts ({ String? name }) async {
+    onLoading();
 
-      // fetch
-      final http.Response httpResult = await http.get(
-        Uri.parse(BaseAPI.routes['products']!),
-        headers: BaseAPI.authHeaders(user.token)
-      );
+    // preparing query params
+    final String queryParams = name != null ? '?name=$name' : '';
 
-      // parse http result
-      final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
+    // fetch
+    final http.Response httpResult = await http.get(
+      Uri.parse('${BaseAPI.routes['products']!}$queryParams'),
+      headers: BaseAPI.authHeaders(user.token)
+    );
 
-      // convert to list
-      _list = response.results.map<ModelProduct>((e) => ModelProduct.fromJson(e)).toList();
+    // parse http result
+    final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
 
-      offLoading();
-      notifyListeners();
-    } else {
-      print('[Products]: Using cached data');
-    }
+    // convert to list
+    _list = response.results.map<ModelProduct>((e) => ModelProduct.fromJson(e)).toList();
+
+    offLoading();
+    notifyListeners();
   }
 
   ModelProduct get selectedProduct {
