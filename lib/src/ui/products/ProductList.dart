@@ -7,17 +7,19 @@ import 'package:multi_screen_app/src/ui/widgets/WidgetProduct.dart';
 import 'package:provider/provider.dart';
 
 class ScreenProductList extends StatefulWidget {
-  const ScreenProductList({super.key});
+  ScreenProductList({super.key});
 
   @override
   State<ScreenProductList> createState() => _ScreenProductListState();
 }
 
 class _ScreenProductListState extends State<ScreenProductList> {
+  final TextEditingController search = TextEditingController();
   late final ModelProduct product;
   @override
   void initState() {
-    Provider.of<ProviderProducts>(context, listen: false).fetchProducts();
+    Provider.of<ProviderProducts>(context, listen: false)
+        .fetchProducts(name: search.text);
   }
 
   @override
@@ -28,12 +30,13 @@ class _ScreenProductListState extends State<ScreenProductList> {
           Flexible(
               flex: 6,
               child: Padding(
-                padding: const EdgeInsets.only(top:25, bottom: 10, left: 10, right: 10),
+                padding: const EdgeInsets.only(
+                    top: 25, bottom: 10, left: 10, right: 10),
                 child: SizedBox(
                   height: 50,
                   width: double.infinity * 0.5,
                   child: TextField(
-                    obscureText: true,
+                    controller: search,
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: const Color(0xFFE6E6E6),
@@ -46,20 +49,24 @@ class _ScreenProductListState extends State<ScreenProductList> {
                   ),
                 ),
               )),
-          Flexible(
-            flex: 1,
-            child: IconButton(
-              icon: const Icon(
-                Icons.search_rounded,
-                size: 35,
-                color: MyStyles.orange,
+          Consumer<ProviderProducts>(builder: (ctx, provider, child) {
+
+            return Flexible(
+              flex: 1,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.search_rounded,
+                  size: 35,
+                  color: MyStyles.orange,
+                ),
+                onPressed: () {
+                  provider.fetchProducts(name: search.text);
+                },
               ),
-              onPressed: () {},
-            ),
-          ),
+            );
+          })
         ],
       ),
-
       Consumer<ProviderProducts>(builder: (ctx, provider, child) {
         if (provider.isLoading()) {
           // here you can show a loading status
@@ -73,6 +80,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
 
           // [pending]: how we suppose to handle thousands of products???
           for (final product in provider.list) {
+            provider.fetchProducts(name: search.text);
             listdewidgets.add(WidgetProduct(
               product: product,
               onPressed: () {
@@ -106,13 +114,15 @@ class _ScreenProductListState extends State<ScreenProductList> {
           }
 
           return Expanded(
-            child: Padding(padding: EdgeInsets.only(left: 35, right: 35),child: GridView.count(
+              child: Padding(
+            padding: EdgeInsets.only(left: 35, right: 35),
+            child: GridView.count(
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 15,
                 childAspectRatio: 0.65,
                 crossAxisCount: 2,
-                children: listdewidgets),)
-          );
+                children: listdewidgets),
+          ));
         }
       })
     ]);
