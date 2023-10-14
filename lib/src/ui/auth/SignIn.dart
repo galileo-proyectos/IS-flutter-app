@@ -148,7 +148,7 @@ class ScreenSignIn extends StatelessWidget {
                             if (errMessage == null) {
                               // do something when sign in was success
                               //Pendiente
-                              print('yes');
+                              ctx.go('/');
                             } else {
                               // show an error, use errMessage
                               WidgetMessageBox.openError(ctx, errMessage,Colors.red);

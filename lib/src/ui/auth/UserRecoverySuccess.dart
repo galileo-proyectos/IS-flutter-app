@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:multi_screen_app/src/ui/widgets/WidgetSuccessMessage.dart';
 
 class ScreenUserRecoverySuccess extends StatelessWidget {

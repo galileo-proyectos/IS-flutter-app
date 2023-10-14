@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 
@@ -22,7 +22,7 @@ class WidgetProduct extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
+                spreadRadius: 2,
                 blurRadius: 3,
                 offset: const Offset(3, 3), // changes position of shadow
               ),

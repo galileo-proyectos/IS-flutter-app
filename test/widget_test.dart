@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:multi_screen_app/src/main.dart';
 import 'package:multi_screen_app/src/ui/mainWidget.dart';
 
 void main() {
