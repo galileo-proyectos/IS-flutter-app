@@ -1,4 +1,5 @@
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
+import 'package:multi_screen_app/src/providers/ProviderPromotions.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetCategoria.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ class _ScreenHomeState extends State<ScreenHome> {
   void initState() {
     // init categories
     Provider.of<ProviderCategories>(context, listen: false).fetchCategories();
+    Provider.of<ProviderPromotions>(context, listen: false).fetchPromotions();
   }
   List imgList = [
     "https://pbs.twimg.com/media/FOFIs5dXIAgxCOp.jpg:large",

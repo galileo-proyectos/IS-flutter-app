@@ -4,10 +4,10 @@ import 'package:multi_screen_app/src/models/ModelProduct.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 
 class WidgetProduct extends StatelessWidget {
-  final ModelProduct producto;
-  final String route;
+  final ModelProduct product;
+  final void Function() onPressed;
 
-  const WidgetProduct({super.key, required this.producto, required this.route});
+  const WidgetProduct({super.key, required this.product, required this.onPressed});
 
   @override
   Widget build(BuildContext ctx) {
@@ -43,7 +43,7 @@ class WidgetProduct extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      producto.imageURL,
+                      product.imageURL,
                       width: 90,
                       height: 90,
                     ),
@@ -53,17 +53,16 @@ class WidgetProduct extends StatelessWidget {
                     child: Padding(
                         padding: const EdgeInsets.only(top: 10, bottom: 5),
                         child: Text(
-                          producto.name,
+                          product.name,
                           style: MyStyles.p,
                           textAlign: TextAlign.center,
                         ))),
                 Text(
-                  "Q${producto.price}",
+                  "Q${product.price}",
                   style: MyStyles.price,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    },
+                  onPressed: onPressed,
                   style: MyStyles.smallButtonStyle,
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,

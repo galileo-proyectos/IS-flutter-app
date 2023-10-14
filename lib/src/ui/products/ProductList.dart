@@ -13,6 +13,7 @@ class ScreenProductList extends StatefulWidget {
 }
 
 class _ScreenProductListState extends State<ScreenProductList> {
+  late final ModelProduct product;
   @override
   void initState() {
     Provider.of<ProviderProducts>(context, listen: false).fetchProducts();
@@ -24,6 +25,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       const Center(child: Text('ScreenProductList')),
       Center(
+
           // Because of consumer when new data is available
           // the widget will automatically be refreshed.
           // This piece is important, modify it but do not remove.
@@ -40,20 +42,21 @@ class _ScreenProductListState extends State<ScreenProductList> {
 
           // [pending]: how we suppose to handle thousands of products???
           for (final product in provider.list) {
-            listdewidgets.add(WidgetProduct(producto: product, route:'/products/details' ,));
-            /*listdewidgets.add(ElevatedButton(
-                    onPressed: () {
-                      // CHANGE YOR CODE HERE
-                      // Alessandro implement this wierd approach thinking that a supermarket
-                      // will have thousands of products... this is faster :D
+            listdewidgets.add(WidgetProduct(
+              product: product,
+              onPressed: () {
+                // CHANGE YOR CODE HERE
+                // Alessandro implement this wierd approach thinking that a supermarket
+                // will have thousands of products... this is faster :D
 
-                      // first you have to selected the product
-                      Provider.of<ProviderProducts>(context, listen: false).selectProduct(product);
-                      // the you can show it's details.
+                // first you have to selected the product
+                Provider.of<ProviderProducts>(context, listen: false)
+                    .selectProduct(product);
+                // the you can show it's details.
 
-                      ctx.go('/products/details');
-                    },
-                    child: Text(product.name)));*/
+                ctx.go('/products/details');
+              },
+            ));
           }
 
           return Column(children: listdewidgets);
