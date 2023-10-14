@@ -9,7 +9,7 @@ class BaseAPI {
 
   static const Map<String, String> routes = {
     'auth': '$_api/auth',
-    'categories': '$_api/aisles',
+    'categories': '$_api/categories',
     'password-recovery': '$_api/password-recovery/send-email',
     'products': '$_api/products',
     'promotions': '$_api/promotions'

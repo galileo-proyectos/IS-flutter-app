@@ -15,7 +15,7 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Image.asset(
-            "lib/src/assets/logo-horizontal-letras.png",
+            "lib/src/assets/img/logo-horizontal-letras.png",
             width: 166,
             height: 40
           ),
