@@ -17,8 +17,9 @@ class ProviderCategories extends DefaultProvider {
 
       // fetch
       final http.Response httpResult = await http.get(
-          Uri.parse('${BaseAPI.routes['categories']}'),
-          headers: BaseAPI.authHeaders(user.token));
+          Uri.https(BaseAPI.authority, BaseAPI.routes['categories']!),
+          headers: BaseAPI.authHeaders(user.token)
+      );
 
       // parse http result
       final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));

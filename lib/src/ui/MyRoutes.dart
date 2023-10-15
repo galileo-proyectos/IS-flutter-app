@@ -56,7 +56,7 @@ class MyRoutes {
           ),
           GoRoute(
               path: '/',
-              builder: (context, state) => Provider(
+              builder: (context, state) => ChangeNotifierProvider(
                 create: (ctx) => ProviderPromotions(ctx),
                 child: ScreenHome(),
               )

@@ -17,8 +17,9 @@ class ProviderPromotions extends DefaultProvider {
 
       // fetch
       final http.Response httpResult = await http.get(
-          Uri.parse('${BaseAPI.routes['promotions']}'),
-          headers: BaseAPI.authHeaders(user.token));
+          Uri.https(BaseAPI.authority, BaseAPI.routes['promotions']!, null),
+          headers: BaseAPI.authHeaders(user.token)
+      );
 
       // parse http result
       final ApiResponse response = ApiResponse.fromJson(jsonDecode(httpResult.body));
