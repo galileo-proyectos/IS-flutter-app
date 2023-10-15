@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
+import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:provider/provider.dart';
 
 class ScreenProductDetail extends StatefulWidget {
@@ -9,7 +10,7 @@ class ScreenProductDetail extends StatefulWidget {
   const ScreenProductDetail({super.key});
 
   @override
-  State<ScreenProductDetail> createState () => _ScreenProductDetailState();
+  State<ScreenProductDetail> createState() => _ScreenProductDetailState();
 }
 
 class _ScreenProductDetailState extends State<ScreenProductDetail> {
@@ -17,31 +18,141 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
   late final ModelProduct product;
 
   @override
-  void initState () {
+  void initState() {
     // read product
-    product = Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
+    product =
+        Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
   }
 
   @override
-  Widget build (BuildContext ctx) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          // CHANGE YOUR CODE HERE
-          // you can do whatever you want, just use product.something to
-          // show info about the product.
-            child: Text('This is the page of ${product.name}')
-        ),
-        Center(
-          child: ElevatedButton(
-            child: const Text('Go back'),
-            onPressed: () {
-              ctx.go('/products');
-            }
+  Widget build(BuildContext ctx) {
+    return SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+          Padding(
+            padding: EdgeInsets.only(top: 20, left: 8),
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_rounded,
+                size: 35,
+                color: MyStyles.purple,
+              ),
+              onPressed: () {
+                ctx.go("/products");
+              },
+            ),
+          ),
+          Row(
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    //Pendiente
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 45),
+                      child: Text(
+                        product.category.name,
+                        style: MyStyles.breadcrumb,
+                      ))),
+              const Padding(
+                padding: EdgeInsets.only(left: 8),
+                child: Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 12,
+                  color: MyStyles.breadcrumbPurple,
+                ),
+              ),
+              GestureDetector(
+                  onTap: () {
+                    //Pendiente
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 8),
+                      child: Text(
+                        product.name,
+                        style: MyStyles.breadcrumb,
+                      ))),
+            ],
+          ),
+          Padding(
+              padding: EdgeInsets.all(20),
+              child: Center(
+                child: Container(
+                  width: 280,
+                  height: 280,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 4,
+                            blurRadius: 2,
+                            offset: const Offset(0, 0)),
+                      ]),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.network(
+                      product.imageURL,
+                      height: 220,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              )),
+          Center(
+            child: Text(
+              product.name,
+              style: MyStyles.h3_black,
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 10, left: 25, right: 25, bottom: 10),
+            child: Center(
+              child: Text(
+                product.description,
+                style: MyStyles.p,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            child: Center(
+              child: Text(
+                "Q${product.price}",
+                style: MyStyles.h3,
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              width: 150,
+              child: Padding(
+                padding: EdgeInsets.only(top: 10, left: 5),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text("Pasillo: ", style: MyStyles.h4_orange,),
+                        Text(product.aisle.name, style: TextStyle(fontSize: 16),)
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text("Stock: ", style: MyStyles.h4_orange,),
+                        Text("  ${product.stock}", style: TextStyle(fontSize: 16),)
+                      ],
+                    ),
+                  ],
+                )
+              ),
+            ),
           )
-        )
-      ]
-    );
+
+        ]));
   }
 }

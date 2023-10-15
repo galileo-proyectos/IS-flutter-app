@@ -7,7 +7,7 @@ class ScreenPurchaseDetail extends StatelessWidget {
   @override
   Widget build (BuildContext ctx) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const Center(
             child: Text('ScreenPurchaseDetail')

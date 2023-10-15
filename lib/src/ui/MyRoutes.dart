@@ -36,34 +36,34 @@ class MyRoutes {
         routes: [
           GoRoute(
             path: '/user/details',
-            builder: (context, state) => ScreenAccountDetail()
+            builder: (context, state) => const ScreenAccountDetail()
           ),
           GoRoute(
             path: '/user/edit',
-            builder: (context, state) => ScreenAccountEdit()
+            builder: (context, state) => const ScreenAccountEdit()
           ),
           GoRoute(
             path: '/cart',
-            builder: (context, state) => ScreenCart()
+            builder: (context, state) => const ScreenCart()
           ),
           GoRoute(
             path: '/cart/completed',
-            builder: (context, state) => ScreenCartCompleted()
+            builder: (context, state) => const ScreenCartCompleted()
           ),
           GoRoute(
             path: '/cart/pay',
-            builder: (context, state) => ScreenPay()
+            builder: (context, state) => const ScreenPay()
           ),
           GoRoute(
               path: '/',
               builder: (context, state) => Provider(
                 create: (ctx) => ProviderPromotions(ctx),
-                child: ScreenHome(),
+                child: const ScreenHome(),
               )
           ),
           GoRoute(
             path: '/products/details',
-            builder: (context, state) => ScreenProductDetail()
+            builder: (context, state) => const ScreenProductDetail()
           ),
           GoRoute(
             path: '/products',
@@ -71,15 +71,15 @@ class MyRoutes {
           ),
           GoRoute(
             path: '/purchases/:id/id',
-            builder: (context, state) => ScreenPurchaseDetail()
+            builder: (context, state) => const ScreenPurchaseDetail()
           ),
           GoRoute(
             path: '/purchases',
-            builder: (context, state) => ScreenPurchaseHistory()
+            builder: (context, state) => const ScreenPurchaseHistory()
           ),
           GoRoute(
               path: '/scanner',
-              builder: (context, state) => ScreenScanner()
+              builder: (context, state) => const ScreenScanner()
           )
         ]
       ),
@@ -92,7 +92,7 @@ class MyRoutes {
           ),
           GoRoute(
               path: '/auth/recovery-password/success',
-              builder: (context, state) => ScreenUserRecoverySuccess()
+              builder: (context, state) => const ScreenUserRecoverySuccess()
           ),
           GoRoute(
               path: '/auth/signUp',
@@ -100,7 +100,7 @@ class MyRoutes {
           ),
           GoRoute(
               path: '/auth/signUp/success',
-              builder: (context, state) => ScreenSignUpSuccess()
+              builder: (context, state) => const ScreenSignUpSuccess()
           ),
           GoRoute(
               path: '/auth/recovery-password',

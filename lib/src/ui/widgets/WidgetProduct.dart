@@ -7,7 +7,8 @@ class WidgetProduct extends StatelessWidget {
   final ModelProduct product;
   final void Function() onPressed;
 
-  const WidgetProduct({super.key, required this.product, required this.onPressed});
+  const WidgetProduct(
+      {super.key, required this.product, required this.onPressed});
 
   @override
   Widget build(BuildContext ctx) {
@@ -30,8 +31,9 @@ class WidgetProduct extends StatelessWidget {
           ),
           child: Center(
               child: Padding(
-            padding: const EdgeInsets.only(top: 25),
+            padding: const EdgeInsets.only(),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 110,
@@ -66,13 +68,17 @@ class WidgetProduct extends StatelessWidget {
                   style: MyStyles.smallButtonStyle,
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
-
                     children: [
-                      Text('Ver más', style: TextStyle(fontSize: 10),) , // <-- Text
+                      Text(
+                        'Ver más',
+                        style: TextStyle(fontSize: 10),
+                      ), // <-- Text
                       SizedBox(
                         width: 5,
+                        height: 25,
                       ),
-                      Icon( // <-- Icon
+                      Icon(
+                        // <-- Icon
                         Icons.arrow_forward_ios_rounded,
                         size: 11,
                       ),

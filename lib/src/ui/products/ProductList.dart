@@ -24,7 +24,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
 
   @override
   Widget build(BuildContext ctx) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       Row(
         children: [
           Flexible(
@@ -71,7 +71,16 @@ class _ScreenProductListState extends State<ScreenProductList> {
         if (provider.isLoading()) {
           // here you can show a loading status
           // CHANGE YOUR CODE HERE
-          return Text('loading...');
+          return const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+
+            children: [
+              Text("Loading...", style: MyStyles.h1,),
+              CircularProgressIndicator(
+                color: MyStyles.orange,
+              )
+            ],);
         } else {
           // here you can construct your category list
           // to finished just return the widget u want to show
@@ -119,7 +128,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
             child: GridView.count(
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 15,
-                childAspectRatio: 0.65,
+                childAspectRatio: 0.6,
                 crossAxisCount: 2,
                 children: listdewidgets),
           ));

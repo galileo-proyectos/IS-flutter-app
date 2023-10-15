@@ -16,7 +16,7 @@ class ModelProduct {
 
   final String _code;
   final String _name;
-  final String? _description;
+  final String _description;
   final double _price;
   final double _stock;
   final String _imageURL;
@@ -27,7 +27,7 @@ class ModelProduct {
 
   String get code => _code;
   String get name => _name;
-  String? get description => _description;
+  String get description => _description;
   double get price => _price;
   double get stock => _stock;
   String get imageURL => _imageURL;
