@@ -12,15 +12,21 @@ class ProviderProducts extends DefaultProvider {
 
   ProviderProducts(super.ctx);
 
-  Future<void> fetchProducts ({ String? name }) async {
+  Future<void> fetchProducts ({ String? name, int? categoryId }) async {
     onLoading();
 
     // preparing query params
-    final String queryParams = name != null ? '?name=$name' : '';
+    final Map<String, String> queryParams = {};
+    if (name != null && name.isNotEmpty) {
+      queryParams['name'] = name;
+    }
+    if (categoryId != null) {
+      queryParams['categoryId'] = categoryId.toString();
+    }
 
     // fetch
     final http.Response httpResult = await http.get(
-      Uri.parse('${BaseAPI.routes['products']!}$queryParams'),
+      Uri.https(BaseAPI.authority, BaseAPI.routes['products']!, queryParams.isNotEmpty ? queryParams : null),
       headers: BaseAPI.authHeaders(user.token)
     );
 

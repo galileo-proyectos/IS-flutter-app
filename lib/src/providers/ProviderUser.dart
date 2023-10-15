@@ -16,7 +16,7 @@ class ProviderUser extends ChangeNotifier {
 
     // push data
     final http.Response httpResult = await http.post(
-        Uri.parse('${BaseAPI.routes['auth']}/signin'),
+        Uri.https(BaseAPI.authority, BaseAPI.routes['signIn']!, null),
         headers: BaseAPI.headers,
         body: _ModelSignIn(email, password).toJSON()
     );
@@ -36,7 +36,7 @@ class ProviderUser extends ChangeNotifier {
 
     // push data
     final http.Response httpResult = await http.post(
-        Uri.parse('${BaseAPI.routes['auth']}/signup'),
+        Uri.https(BaseAPI.authority, BaseAPI.routes['signUp']!, null),
         headers: BaseAPI.headers,
         body: _ModelSignUp(email, password, bornDate, phone, acceptPromotions).toJSON()
     );
@@ -55,7 +55,7 @@ class ProviderUser extends ChangeNotifier {
 
     // push data
     final http.Response httpResult = await http.post(
-        Uri.parse(BaseAPI.routes['password-recovery']!),
+        Uri.https(BaseAPI.authority, BaseAPI.routes['password-recovery']!, null),
         headers: BaseAPI.headers,
         body: _ModelRecoveryPassword(email).toJSON()
     );
