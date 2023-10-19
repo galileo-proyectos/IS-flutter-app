@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:multi_screen_app/src/providers/DefaultProvider.dart';
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
 import 'package:multi_screen_app/src/models/ApiResponse.dart';
@@ -10,34 +11,49 @@ class ProviderProducts extends DefaultProvider {
   List<ModelProduct> _list = [];
   ModelProduct? _selectedProduct;
 
+  // filters
+  final TextEditingController nameFilter = TextEditingController();
+  final TextEditingController categoryIdFilter = TextEditingController();
+
   ProviderProducts(super.ctx);
 
-  Future<void> fetchProducts ({ String? name, int? categoryId }) async {
-    onLoading();
+  Future<void> fetchProducts () async {
+    final String name = nameFilter.text;
+    final String categoryId = categoryIdFilter.text;
 
-    // preparing query params
-    final Map<String, String> queryParams = {};
-    if (name != null && name.isNotEmpty) {
-      queryParams['name'] = name;
+    if (name.isNotEmpty || list.isEmpty) {
+      onLoading();
+
+      // preparing query params
+      final Map<String, String> queryParams = {};
+      if (name != null && name.isNotEmpty) {
+        queryParams['name'] = name;
+      }
+      if (categoryId != null) {
+        queryParams['categoryId'] = categoryId;
+      }
+
+      // fetch
+      final http.Response httpResult = await http.get(
+          Uri.https(BaseAPI.authority, BaseAPI.routes['products']!, queryParams.isNotEmpty ? queryParams : null),
+          headers: BaseAPI.authHeaders(user.token)
+      );
+
+      // parse http result
+      final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
+
+      // convert to list
+      _list = response.results.map<ModelProduct>((e) => ModelProduct.fromJson(e)).toList();
+
+      offLoading();
+      notifyListeners();
     }
-    if (categoryId != null) {
-      queryParams['categoryId'] = categoryId.toString();
+  }
+
+  Future<void> initProductList () async {
+    if (list.isEmpty) {
+      await fetchProducts();
     }
-
-    // fetch
-    final http.Response httpResult = await http.get(
-      Uri.https(BaseAPI.authority, BaseAPI.routes['products']!, queryParams.isNotEmpty ? queryParams : null),
-      headers: BaseAPI.authHeaders(user.token)
-    );
-
-    // parse http result
-    final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
-
-    // convert to list
-    _list = response.results.map<ModelProduct>((e) => ModelProduct.fromJson(e)).toList();
-
-    offLoading();
-    notifyListeners();
   }
 
   ModelProduct get selectedProduct {
