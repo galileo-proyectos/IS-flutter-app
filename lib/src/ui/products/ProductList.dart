@@ -52,7 +52,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
                   color: MyStyles.orange,
                 ),
                 onPressed: () {
-                  Provider.of<ProviderProducts>(ctx, listen: false).fetchProducts();
+                 
                 }))
       ]),
       Consumer<ProviderProducts>(builder: (ctx, provider, child) {
@@ -75,7 +75,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
               product: product,
               onPressed: () {
                 // CHANGE YOR CODE HERE
-                // Alessandro implement this wierd approach thinking that a supermarket
+                // Alessandro implement this weird approach thinking that a supermarket
                 // will have thousands of products... this is faster :D
 
                 // first you have to selected the product
