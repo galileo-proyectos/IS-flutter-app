@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class WidgetBottomNavigationBar extends StatelessWidget{
+class WidgetBottomNavigationBar extends StatelessWidget {
   const WidgetBottomNavigationBar({super.key});
+
   @override
-  Widget Build(BuildContext ctx){
+  Widget build(BuildContext ctx) {
     return BottomNavigationBar(
 
       items: const <BottomNavigationBarItem>[
@@ -35,7 +36,6 @@ class WidgetBottomNavigationBar extends StatelessWidget{
         ),
       ],
       selectedItemColor: const Color(0xFFF58000),
-
     );
   }
 }
