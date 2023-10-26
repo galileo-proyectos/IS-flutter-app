@@ -1,4 +1,6 @@
+import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
+import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/providers/ProviderPromotions.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetCategoria.dart';
@@ -43,11 +45,11 @@ class _ScreenHomeState extends State<ScreenHome> {
               // here you can construct your category list
               // to finished just return the widget u want to show
               // CHANGE YOUR CODE HERE
-              List <String> imgList = [];
+              final List<String> imgList = [];
 
-              provider.list.forEach((promotion) {
+              for (final promotion in provider.list) {
                 imgList.add(promotion.imageURL);
-              });
+              }
 
               return CarouselSlider(
                 options: CarouselOptions(
@@ -79,25 +81,31 @@ class _ScreenHomeState extends State<ScreenHome> {
           if (provider.isLoading()) {
             // here you can show a loading status
             // CHANGE YOUR CODE HERE
-            return Text('loading...');
+            return const Text('loading...');
           } else {
             // here you can construct your category list
             // to finished just return the widget u want to show
             // CHANGE YOUR CODE HERE
-            List<WidgetCategoria> listdewidgets = [];
+            final List<WidgetCategory> widgetList = [];
 
-            provider.list.forEach((category) {
-              listdewidgets.add(WidgetCategoria(name: category.name, urlImg: category.imageURL));
-            });
+            for (final category in provider.list) {
+              widgetList.add(WidgetCategory(
+                name: category.name,
+                urlImg: category.imageURL,
+                onTap: () {
+                  // Provider.of<ProviderProducts>(ctx, listen: false).categoryIdFilter.text = category.id.toString();
+                  ctx.go('/products');
+                }
+              ));
+            }
 
-            return Column(children: listdewidgets);
+            return Column(children: widgetList);
           }
         }),
           const Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(20)
           )
-
-      ]),
+      ])
     );
   }
 }

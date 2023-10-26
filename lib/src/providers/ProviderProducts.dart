@@ -22,7 +22,7 @@ class ProviderProducts extends DefaultProvider {
     final String name = nameFilter.text;
     final String categoryId = categoryIdFilter.text;
 
-    if (name.isNotEmpty || list.isEmpty) {
+    if (name.isNotEmpty || categoryId.isNotEmpty || list.isEmpty) {
       onLoading();
 
       // preparing query params
