@@ -14,7 +14,9 @@ class ProviderProducts extends DefaultProvider {
   // filters
   final TextEditingController nameFilter = TextEditingController();
   final TextEditingController categoryIdFilter = TextEditingController();
-  final bool isProductScanned = false;
+  bool isProductScanned = false;
+
+  bool _showFilters = false;
 
   ProviderProducts(super.ctx);
 
@@ -84,6 +86,14 @@ class ProviderProducts extends DefaultProvider {
   }
   void selectProduct (ModelProduct product) {
     _selectedProduct = product;
+  }
+
+  bool get showFilters => _showFilters;
+  void setShowFilters (bool value) {
+    if (_showFilters != value) {
+      _showFilters = value;
+      notifyListeners();
+    }
   }
 
   UnmodifiableListView<ModelProduct> get list => UnmodifiableListView(_list);

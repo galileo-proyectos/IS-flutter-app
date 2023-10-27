@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<ProviderUser>(
       create: (ctx) => ProviderUser(),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: MyRoutes.getRoutes()
       )
     );
