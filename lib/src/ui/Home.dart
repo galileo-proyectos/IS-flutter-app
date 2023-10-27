@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
-import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/providers/ProviderPromotions.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetCategoria.dart';

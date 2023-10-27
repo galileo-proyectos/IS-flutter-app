@@ -18,6 +18,7 @@ import 'package:multi_screen_app/src/ui/cart/Scanner.dart';
 import 'package:multi_screen_app/src/ui/Home.dart';
 import 'package:multi_screen_app/src/ui/products/ProductList.dart';
 import 'package:multi_screen_app/src/ui/cart/pay.dart';
+import 'package:multi_screen_app/src/ui/products/WidgetSlideUpFilters.dart';
 import 'package:multi_screen_app/src/ui/purchases/PurchaseDetail.dart';
 import 'package:multi_screen_app/src/ui/purchases/PurchaseHistory.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetAppBar.dart';
@@ -68,7 +69,13 @@ class MyRoutes {
           ),
           GoRoute(
             path: '/products',
-            builder: (context, state) => ScreenProductList()
+            builder: (context, state) => const Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                ScreenProductList(),
+                WidgetSlideUpFilters()
+              ],
+            )
           ),
           GoRoute(
             path: '/purchases/:id/id',
@@ -123,10 +130,9 @@ class MyRoutes {
         )
       ],
       child: Scaffold(
-          appBar: const WidgetAppBar(),
-          body: child,
+        appBar: const WidgetAppBar(),
+        body: child,
         bottomNavigationBar: const WidgetBottomNavigationBar(),
-
       )
     );
   }
