@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:multi_screen_app/src/models/ModelCategory.dart';
+import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
+import 'package:multi_screen_app/src/ui/MyStyles.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetCheckBox.dart';
 import 'package:provider/provider.dart';
 
 class WidgetSlideUpFilters extends StatefulWidget {
@@ -11,6 +15,10 @@ class WidgetSlideUpFilters extends StatefulWidget {
 
 class _WidgetSlideUpFiltersState extends State<WidgetSlideUpFilters> {
   @override
+  void initState() {
+    // init categories
+    Provider.of<ProviderCategories>(context, listen: false).fetchCategories();
+  }
   Widget build (BuildContext ctx) {
     return Consumer<ProviderProducts>(builder: (ctx, provider, child) {
       if (provider.showFilters) {
@@ -33,16 +41,53 @@ class _WidgetSlideUpFiltersState extends State<WidgetSlideUpFilters> {
               width: double.infinity,
               height: 300,
               decoration: const BoxDecoration(
-                color: Colors.red,
+                color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20)
                 )
               ),
-              child: const Column(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // title
-                  Text('Filtros')
+                  const Padding(padding: EdgeInsets.only(left:35, top:35),
+                  child: Text("Filtros", style:MyStyles.h2)),
+                  const Padding(padding: EdgeInsets.only(left: 45, top: 10),
+                      child: Text("Categoría", style:MyStyles.h3)),
+                  Consumer<ProviderCategories>(builder: (ctx, provider, child) {
+                    if (provider.isLoading()) {
+                      // here you can show a loading status
+                      // CHANGE YOUR CODE HERE
+                      return const Text('loading...');
+                    } else {
+                      // here you can construct your category list
+                      // to finished just return the widget u want to show
+                      // CHANGE YOUR CODE HERE
+                      final List<Container> widgetList = [];
+                      //Hola :D Te hice esta lista para marcar las categorías que si se marcaron xd
+                      final List<ModelCategory> checked = [];
+
+                      for (final category in provider.list) {
+                        widgetList.add(Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Row(children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 35),
+                                child: WidgetCheckBox(onChanged: (value) {
+                                  checked.add(category);
+                                }),
+                              ),
+                              Text(category.name)
+                            ]),
+                          ),
+                        ));
+                      }
+
+                      return Column(children: widgetList);
+                    }
+                  }),
                 ]
               )
             )
