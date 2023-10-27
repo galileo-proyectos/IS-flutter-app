@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
+
+
 class WidgetBottomNavigationBar extends StatelessWidget {
   const WidgetBottomNavigationBar({super.key});
+
   @override
+
   Widget build (BuildContext ctx) {
     return NavigationBar(
       onDestinationSelected: (int index) {
@@ -28,7 +32,7 @@ class WidgetBottomNavigationBar extends StatelessWidget {
           selectedIcon: Icon(Icons.home, color: MyStyles.purple),
           icon: Icon(Icons.home, color: MyStyles.purple,),
           label: '',
-        ),
+            ),
         NavigationDestination(
           selectedIcon: Icon(Icons.home),
           icon: Icon(Icons.barcode_reader, color: MyStyles.purple),

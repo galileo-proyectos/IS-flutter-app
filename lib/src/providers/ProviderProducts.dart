@@ -14,6 +14,7 @@ class ProviderProducts extends DefaultProvider {
   // filters
   final TextEditingController nameFilter = TextEditingController();
   final TextEditingController categoryIdFilter = TextEditingController();
+  final bool isProductScanned = false;
 
   ProviderProducts(super.ctx);
 
@@ -21,7 +22,7 @@ class ProviderProducts extends DefaultProvider {
     final String name = nameFilter.text;
     final String categoryId = categoryIdFilter.text;
 
-    if (name.isNotEmpty || list.isEmpty) {
+    if (name.isNotEmpty || categoryId.isNotEmpty || list.isEmpty) {
       onLoading();
 
       // preparing query params
@@ -54,6 +55,25 @@ class ProviderProducts extends DefaultProvider {
     if (list.isEmpty) {
       await fetchProducts();
     }
+  }
+
+  Future<void> fetchAndSelectProduct (String productCode) async {
+    onLoading();
+
+    // fetch
+    final http.Response httpResult = await http.get(
+        Uri.https(BaseAPI.authority, '${BaseAPI.routes['products']}/$productCode/code'),
+        headers: BaseAPI.authHeaders(user.token)
+    );
+
+    // parse http result
+    final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
+
+    // convert to list
+    _selectedProduct = ModelProduct.fromJson(response.results[0]);
+
+    offLoading();
+    notifyListeners();
   }
 
   ModelProduct get selectedProduct {
