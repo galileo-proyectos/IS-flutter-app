@@ -21,11 +21,7 @@ class ScreenScanner extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => const SimpleBarcodeScannerPage(),
                       ));
-                  setState(() {
-                    if (res is String) {
-                      result = res;
-                    }
-                  });
+
                 },
                 child: const Text('Open Scanner'),
               ),
