@@ -22,11 +22,12 @@ import 'package:multi_screen_app/src/ui/products/WidgetSlideUpFilters.dart';
 import 'package:multi_screen_app/src/ui/purchases/PurchaseDetail.dart';
 import 'package:multi_screen_app/src/ui/purchases/PurchaseHistory.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetAppBar.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetBottomNavigationBar.dart';
 import 'package:provider/provider.dart';
 
 class MyRoutes {
 
-  static const _initialLocation = '/';
+  static const _initialLocation = '/products';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
@@ -130,7 +131,8 @@ class MyRoutes {
       ],
       child: Scaffold(
         appBar: const WidgetAppBar(),
-        body: child
+        body: child,
+        bottomNavigationBar: const WidgetBottomNavigationBar(),
       )
     );
   }
