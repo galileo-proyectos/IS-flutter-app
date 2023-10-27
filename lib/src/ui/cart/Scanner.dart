@@ -1,11 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
+import 'package:provider/provider.dart';
 
 class ScreenScanner extends StatelessWidget {
   const ScreenScanner({super.key});
 
+  void scanCode (BuildContext ctx) async {
+    String barcodeResult;
+    try {
+      barcodeResult = await FlutterBarcodeScanner.scanBarcode(
+          '#fff58000',
+          'Salir',
+          true,
+          ScanMode.BARCODE
+      );
+    } on PlatformException {
+      barcodeResult = 'fail';
+    }
+    if (ctx.mounted) {
+      print(barcodeResult);
+      final isFound = await Provider.of<ProviderProducts>(ctx, listen: false).fetchAndSelectProduct(barcodeResult);
+      if (isFound && ctx.mounted) {
+        ctx.go('/products/details');
+      } else {
+        if (ctx.mounted) {
+          scanCode(ctx);
+        }
+      }
+    }
+  }
+
   @override
   Widget build (BuildContext ctx) {
-    String result = '';
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -14,14 +43,15 @@ class ScreenScanner extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               ElevatedButton(
-                onPressed: () async {},
-                child: const Text('Open Scanner'),
-              ),
-              Text('Barcode Result: $result'),
-            ],
-          ),
-        ),
-      ],
+                onPressed: () async {
+                  scanCode(ctx);
+                },
+                child: const Text('Open Scanner')
+              )
+            ]
+          )
+        )
+      ]
     );
   }
 }

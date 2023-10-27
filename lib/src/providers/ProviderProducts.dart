@@ -59,7 +59,7 @@ class ProviderProducts extends DefaultProvider {
     }
   }
 
-  Future<void> fetchAndSelectProduct (String productCode) async {
+  Future<bool> fetchAndSelectProduct (String productCode) async {
     onLoading();
 
     // fetch
@@ -70,12 +70,19 @@ class ProviderProducts extends DefaultProvider {
 
     // parse http result
     final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
+    print(response.toString().toUpperCase());
 
     // convert to list
-    _selectedProduct = ModelProduct.fromJson(response.results[0]);
+    if (response.isSuccess()) {
+      _selectedProduct = ModelProduct.fromJson(response.results);
+      print('\n\n\n');
+      print(_selectedProduct);
+      print('\n\n\n');
+    }
 
     offLoading();
     notifyListeners();
+    return response.isSuccess();
   }
 
   ModelProduct get selectedProduct {
