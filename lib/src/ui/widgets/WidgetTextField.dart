@@ -22,7 +22,7 @@ class WidgetTextField extends StatelessWidget {
           hintText: hintText
       ),
       onChanged: (value) {
-        EasyDebounce.debounce('product-debounce-fetch', const Duration(milliseconds: 500), () {
+        EasyDebounce.debounce('product-debounce-fetch', const Duration(milliseconds: 300), () {
           onChanged(value);
         });
       }
