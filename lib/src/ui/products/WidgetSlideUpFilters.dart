@@ -4,6 +4,7 @@ import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetCheckBox.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetDoubleSlider.dart';
 import 'package:provider/provider.dart';
 
 class WidgetSlideUpFilters extends StatefulWidget {
@@ -57,7 +58,7 @@ class _WidgetSlideUpFiltersState extends State<WidgetSlideUpFilters> {
                             // title
                             const Padding(padding: EdgeInsets.only(left:35, top:35),
                                 child: Text("Filtros", style:MyStyles.h2)),
-                            const Padding(padding: EdgeInsets.only(left: 45, top: 5),
+                            const Padding(padding: EdgeInsets.only(left: 45, top: 15, bottom:15),
                                 child: Text("Categoría", style:MyStyles.h3)),
                             Consumer<ProviderCategories>(builder: (ctx, provider, child) {
                               if (provider.isLoading()) {
@@ -74,7 +75,7 @@ class _WidgetSlideUpFiltersState extends State<WidgetSlideUpFilters> {
                                 for (final category in provider.list) {
                                   widgetList.add(Container(
                                     child: Padding(
-                                      padding: const EdgeInsets.only(top: 5),
+                                      padding: const EdgeInsets.only(),
                                       child: Row(children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 35),
@@ -90,11 +91,17 @@ class _WidgetSlideUpFiltersState extends State<WidgetSlideUpFilters> {
 
                                 return Column(children: widgetList);
                               }
-                            })
+                            }),
+                            //const Padding(padding: EdgeInsets.only(top:15, left: 35),
+                            //child:  Text("Rango de Precios", style:MyStyles.h3)),
+                            //const Padding(padding: EdgeInsets.only(top:15, left: 15, right: 15),
+                             // child: RangeSliderExample(),),
+
+                            const Padding(padding: EdgeInsets.all(15))
                           ]
                       ),
                     )
-                )
+                ),
               ]
           );
         } else {
