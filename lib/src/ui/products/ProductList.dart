@@ -60,6 +60,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
 
                     // hide keyboard
                     FocusManager.instance.primaryFocus?.unfocus();
+                    FocusManager.instance.primaryFocus?.unfocus();
                   }
                 )
               )

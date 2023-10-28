@@ -35,22 +35,22 @@ class ScreenScanner extends StatelessWidget {
   @override
   Widget build (BuildContext ctx) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-         Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  scanCode(ctx);
-                },
-                child: const Text('Open Scanner')
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () async {
+                          scanCode(ctx);
+                        },
+                        child: const Text('Open Scanner')
+                    )
+                  ]
               )
-            ]
           )
-        )
-      ]
+        ]
     );
   }
 }
