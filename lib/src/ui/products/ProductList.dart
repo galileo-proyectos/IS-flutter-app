@@ -98,19 +98,6 @@ class _ScreenProductListState extends State<ScreenProductList> {
                       ctx.go('/products/details');
                     }
                 ));
-                widgetList.add(WidgetProduct(
-                    product: product,
-                    onPressed: () {
-                      // CHANGE YOR CODE HERE
-                      // Alessandro implement this wierd approach thinking that a supermarket
-                      // will have thousands of products... this is faster :D
-
-                      // first you have to selected the product
-                      Provider.of<ProviderProducts>(context, listen: false).selectProduct(product);
-                      // the you can show it's details.
-                      ctx.go('/products/details');
-                    }
-                ));
               }
 
               return Expanded(
