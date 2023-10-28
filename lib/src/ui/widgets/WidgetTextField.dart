@@ -6,11 +6,13 @@ import 'package:multi_screen_app/src/ui/MyStyles.dart';
 class WidgetTextField extends StatelessWidget {
   final String hintText;
   final Function(String) onChanged;
+  final String initValue;
 
-  const WidgetTextField({super.key, required this.hintText, required this.onChanged});
+  WidgetTextField({super.key, required this.hintText, required this.onChanged, this.initValue = ''});
 
   @override build (BuildContext ctx) {
     return TextField(
+      controller: TextEditingController(text: initValue),
       decoration: InputDecoration(
           filled: true,
           fillColor: const Color(0xFFE6E6E6),

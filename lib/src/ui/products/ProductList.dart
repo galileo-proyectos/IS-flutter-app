@@ -37,9 +37,9 @@ class _ScreenProductListState extends State<ScreenProductList> {
                           height: 50,
                           width: double.infinity * 0.5,
                           child: WidgetTextField(
+                            initValue: Provider.of<ProviderProducts>(context, listen: false).nameFilter.text,
                             hintText: 'Buscar',
                             onChanged: (String value) {
-                              print(DateTime.now());
                               Provider.of<ProviderProducts>(context, listen: false).nameFilter.text = value;
                               Provider.of<ProviderProducts>(context, listen: false).fetchProducts();
                             }
