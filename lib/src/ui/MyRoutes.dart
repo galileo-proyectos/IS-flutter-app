@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
+import 'package:multi_screen_app/src/providers/ProviderLoading.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/providers/ProviderPromotions.dart';
 import 'package:multi_screen_app/src/ui/account/AccountDetail.dart';
@@ -74,7 +75,7 @@ class MyRoutes {
               children: [
                 ScreenProductList(),
                 WidgetSlideUpFilters()
-              ],
+              ]
             )
           ),
           GoRoute(
@@ -127,11 +128,31 @@ class MyRoutes {
         ),
         ChangeNotifierProvider<ProviderProducts>(
             create: (ctx) => ProviderProducts(ctx)
+        ),
+        ChangeNotifierProvider<ProviderLoading>(
+            create: (ctx) => ProviderLoading()
         )
       ],
       child: Scaffold(
         appBar: const WidgetAppBar(),
-        body: child,
+        body: Stack(
+          children: [
+            Consumer<ProviderLoading>(builder: (ctx, provider, child) {
+              if (provider.isLoading) {
+                return Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                  )
+                );
+              } else {
+                return Container();
+              }
+            }),
+            child
+          ]
+        ),
         bottomNavigationBar: const WidgetBottomNavigationBar(),
       )
     );

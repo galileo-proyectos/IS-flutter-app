@@ -21,7 +21,6 @@ class ScreenScanner extends StatelessWidget {
       barcodeResult = 'fail';
     }
     if (ctx.mounted) {
-      print(barcodeResult);
       final isFound = await Provider.of<ProviderProducts>(ctx, listen: false).fetchAndSelectProduct(barcodeResult);
       if (isFound && ctx.mounted) {
         ctx.go('/products/details');

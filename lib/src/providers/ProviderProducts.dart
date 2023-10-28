@@ -70,14 +70,10 @@ class ProviderProducts extends DefaultProvider {
 
     // parse http result
     final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
-    print(response.toString().toUpperCase());
 
     // convert to list
     if (response.isSuccess()) {
       _selectedProduct = ModelProduct.fromJson(response.results);
-      print('\n\n\n');
-      print(_selectedProduct);
-      print('\n\n\n');
     }
 
     offLoading();

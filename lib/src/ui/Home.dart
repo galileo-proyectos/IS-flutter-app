@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
+import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/providers/ProviderPromotions.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetCategoria.dart';
@@ -92,7 +93,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 name: category.name,
                 urlImg: category.imageURL,
                 onTap: () {
-                  // Provider.of<ProviderProducts>(ctx, listen: false).categoryIdFilter.text = category.id.toString();
+                  Provider.of<ProviderProducts>(ctx, listen: false).categoryIdFilter.text = category.id.toString();
                   ctx.go('/products');
                 }
               ));
