@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:multi_screen_app/src/providers/DefaultProvider.dart';
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
@@ -13,7 +15,7 @@ class ProviderProducts extends DefaultProvider {
 
   // filters
   final TextEditingController nameFilter = TextEditingController();
-  final TextEditingController categoryIdFilter = TextEditingController();
+  final List<int> categoryIdsFilter = [];
   bool isProductScanned = false;
 
   bool _showFilters = false;
@@ -22,9 +24,9 @@ class ProviderProducts extends DefaultProvider {
 
   Future<void> fetchProducts () async {
     final String name = nameFilter.text;
-    final String categoryId = categoryIdFilter.text;
+    final String categoryIds = categoryIdsFilter.map((e) => e.toString()).join(',');
 
-    if (name.isNotEmpty || categoryId.isNotEmpty || list.isEmpty) {
+    if (name.isNotEmpty || categoryIds.isNotEmpty || list.isEmpty) {
       onLoading();
 
       // preparing query params
@@ -32,8 +34,8 @@ class ProviderProducts extends DefaultProvider {
       if (name != null && name.isNotEmpty) {
         queryParams['name'] = name;
       }
-      if (categoryId != null) {
-        queryParams['categoryId'] = categoryId;
+      if (categoryIds.isNotEmpty) {
+        queryParams['categoryIds'] = categoryIds;
       }
 
       // fetch
@@ -54,7 +56,7 @@ class ProviderProducts extends DefaultProvider {
   }
 
   Future<void> initProductList () async {
-    if (list.isEmpty) {
+    if (list.isEmpty || categoryIdsFilter.isNotEmpty) {
       await fetchProducts();
     }
   }
@@ -97,6 +99,11 @@ class ProviderProducts extends DefaultProvider {
       _showFilters = value;
       notifyListeners();
     }
+  }
+
+  void setCategoryIdsFilter (List<int> ids) {
+    categoryIdsFilter.clear();
+    categoryIdsFilter.addAll(ids);
   }
 
   UnmodifiableListView<ModelProduct> get list => UnmodifiableListView(_list);

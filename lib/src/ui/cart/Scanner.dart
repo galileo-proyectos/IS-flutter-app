@@ -9,7 +9,7 @@ class ScreenScanner extends StatelessWidget {
   const ScreenScanner({super.key});
 
   void scanCode (BuildContext ctx) async {
-    String barcodeResult;
+    String barcodeResult = 'exit';
     try {
       barcodeResult = await FlutterBarcodeScanner.scanBarcode(
           '#fff58000',
@@ -25,7 +25,7 @@ class ScreenScanner extends StatelessWidget {
       if (isFound && ctx.mounted) {
         ctx.go('/products/details');
       } else {
-        if (ctx.mounted) {
+        if (ctx.mounted && barcodeResult != 'exit') {
           scanCode(ctx);
         }
       }

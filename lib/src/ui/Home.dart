@@ -93,7 +93,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 name: category.name,
                 urlImg: category.imageURL,
                 onTap: () {
-                  Provider.of<ProviderProducts>(ctx, listen: false).categoryIdFilter.text = category.id.toString();
+                  Provider.of<ProviderProducts>(ctx, listen: false).setCategoryIdsFilter([category.id]);
                   ctx.go('/products');
                 }
               ));
