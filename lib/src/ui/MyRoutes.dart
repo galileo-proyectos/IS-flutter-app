@@ -28,7 +28,7 @@ import 'package:provider/provider.dart';
 
 class MyRoutes {
 
-  static const _initialLocation = '/products';
+  static const _initialLocation = '/auth/signIn';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
