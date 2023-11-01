@@ -12,7 +12,6 @@ import 'package:multi_screen_app/src/ui/auth/UserRecoverySuccess.dart';
 import 'package:multi_screen_app/src/ui/auth/SignUp.dart';
 import 'package:multi_screen_app/src/ui/auth/SignUpSuccess.dart';
 import 'package:multi_screen_app/src/ui/auth/UserRecovery.dart';
-
 import 'package:multi_screen_app/src/ui/cart/Cart.dart';
 import 'package:multi_screen_app/src/ui/cart/CartCompleted.dart';
 import 'package:multi_screen_app/src/ui/products/ProductDetail.dart';
@@ -29,7 +28,7 @@ import 'package:provider/provider.dart';
 
 class MyRoutes {
 
-  static const _initialLocation = '/';
+  static const _initialLocation = '/home';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
