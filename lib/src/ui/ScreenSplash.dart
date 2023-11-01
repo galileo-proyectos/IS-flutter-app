@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/providers/ProviderUser.dart';
@@ -22,10 +21,12 @@ class _ScreenSplashState extends State<ScreenSplash> {
     // my start code here
     final isSignedIn = await Provider.of<ProviderUser>(context, listen: false).testStoredJWT();
 
-    if (isSignedIn) {
-      context.go('/home');
-    } else {
-      context.go('/auth/SignIn');
+    if (mounted) {
+      if (isSignedIn) {
+        context.go('/home');
+      } else {
+        context.go('/auth/SignIn');
+      }
     }
   }
 
