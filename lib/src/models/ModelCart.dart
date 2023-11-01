@@ -30,6 +30,14 @@ class ModelCart {
     // add new total
     _total += _details[index].product.price * quantity;
   }
+  bool isInCart (ModelProduct product) {
+    for (final detail in _details) {
+      if (detail.product.code == product.code) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   bool hasConsumer () => _consumer != CartConsumer.defaultConsumer;
   bool hasCard () => _card != CartCard.defaultCard;

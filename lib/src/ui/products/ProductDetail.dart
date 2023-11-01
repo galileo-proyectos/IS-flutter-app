@@ -18,10 +18,15 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
   late final ModelProduct product;
 
   @override
-  void initState() {
+  void initState () {
     // read product
-    product =
-        Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
+    product = Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
+  }
+
+  @override
+  void deactivate () {
+    // clear product
+    Provider.of<ProviderProducts>(context, listen: false).unselectProduct();
   }
 
   @override

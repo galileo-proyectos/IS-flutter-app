@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:multi_screen_app/src/providers/DefaultProvider.dart';
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
@@ -16,7 +14,7 @@ class ProviderProducts extends DefaultProvider {
   // filters
   final TextEditingController nameFilter = TextEditingController();
   final List<int> categoryIdsFilter = [];
-  bool isProductScanned = false;
+  bool _isProductScanned = false;
 
   bool _showFilters = false;
 
@@ -25,8 +23,6 @@ class ProviderProducts extends DefaultProvider {
   Future<void> fetchProducts () async {
     final String name = nameFilter.text;
     final String categoryIds = categoryIdsFilter.map((e) => e.toString()).join(',');
-    print(categoryIds);
-    print(name);
 
     onLoading();
 
@@ -76,6 +72,7 @@ class ProviderProducts extends DefaultProvider {
     // convert to list
     if (response.isSuccess()) {
       _selectedProduct = ModelProduct.fromJson(response.results);
+      _isProductScanned = true;
     }
 
     offLoading();
@@ -83,16 +80,23 @@ class ProviderProducts extends DefaultProvider {
     return response.isSuccess();
   }
 
+  bool get isProductScanned => _isProductScanned;
   ModelProduct get selectedProduct {
     if (_selectedProduct != null) {
       return _selectedProduct!;
     }
     throw ArgumentError('not selected product found');
   }
-  void selectProduct (ModelProduct product) {
+  void selectProduct (ModelProduct product, { bool isScanned = false }) {
     _selectedProduct = product;
+    _isProductScanned = isScanned;
+  }
+  void unselectProduct () {
+    _selectedProduct = null;
+    _isProductScanned = false;
   }
 
+  // this is for ui
   bool get showFilters => _showFilters;
   void setShowFilters (bool value) {
     if (_showFilters != value) {

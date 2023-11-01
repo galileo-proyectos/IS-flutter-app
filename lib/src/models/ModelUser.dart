@@ -1,5 +1,3 @@
-
-
 class ModelUser {
   final String _token;
 

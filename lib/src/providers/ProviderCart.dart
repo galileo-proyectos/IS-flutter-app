@@ -1,7 +1,6 @@
 import 'package:multi_screen_app/src/providers/DefaultProvider.dart';
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
 import 'package:multi_screen_app/src/models/ModelCart.dart';
-import 'package:http/http.dart' as http;
 
 class ProviderCart extends DefaultProvider {
   final ModelCart _cart = ModelCart();
@@ -20,6 +19,9 @@ class ProviderCart extends DefaultProvider {
   void updateQuantityAt (int index, double quantity) {
     _cart.updateQuantityAt(index, quantity);
     notifyListeners();
+  }
+  bool isInCart (ModelProduct product) {
+    return _cart.isInCart(product);
   }
 
   void setConsumer (String businessName, String nit) {
