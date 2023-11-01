@@ -8,6 +8,9 @@ class ProviderCart extends DefaultProvider {
   ProviderCart(super.ctx);
 
   ModelCart get cart => _cart;
+
+  List<CartDetail> get details => _cart.details;
+
   void addDetail (ModelProduct product, double quantity) {
     _cart.addDetail(product, quantity);
     notifyListeners();

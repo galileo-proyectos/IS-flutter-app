@@ -3,7 +3,7 @@ import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/providers/ProviderPromotions.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
-import 'package:multi_screen_app/src/ui/widgets/WidgetCategoria.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetCategory.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';

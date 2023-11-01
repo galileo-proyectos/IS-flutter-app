@@ -49,6 +49,7 @@ class WidgetProduct extends StatelessWidget {
                       width: 90,
                       height: 90,
                     ),
+
                   ),
                 ),
                 Flexible(
@@ -56,7 +57,7 @@ class WidgetProduct extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 10, bottom: 5),
                         child: Text(
                           product.name,
-                          style: MyStyles.p,
+                          style: MyStyles.subtitle,
                           textAlign: TextAlign.center,
                         ))),
                 Text(
