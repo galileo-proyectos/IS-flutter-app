@@ -42,22 +42,29 @@ class MyStyles {
 
   static const TextStyle messageStyle =
       TextStyle(fontSize: 25, fontWeight: FontWeight.w400);
+
   static const TextStyle p = TextStyle(fontSize: 12);
+
+  static const TextStyle subtitle = TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
+
   static const TextStyle fieldStyle =
       TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
+
   static const TextStyle hintText = TextStyle(color: Color(0xFF9E9E9E));
+
   static ButtonStyle buttonStyle = ElevatedButton.styleFrom(
     backgroundColor: const Color(0xFF592D8C),
     minimumSize: const Size(120, 50),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     // background
   );
+
   static ButtonStyle smallButtonStyle = ElevatedButton.styleFrom(
     backgroundColor: const Color(0xFF592D8C),
     minimumSize: const Size(80, 15),
-
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     // background
   );
+
   static const TextStyle breadcrumb = TextStyle(color: breadcrumbPurple, fontSize: 15, fontWeight: FontWeight.w600);
 }

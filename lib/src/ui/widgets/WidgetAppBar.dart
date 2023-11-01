@@ -19,7 +19,7 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {
                 ctx.go('/products');
               },
-              icon: Icon(Icons.search_rounded, color: MyStyles.purple, size: 35,))
+              icon: const Icon(Icons.search_rounded, color: MyStyles.orange, size: 35,))
         ],
         title: Center(
             child: Padding(

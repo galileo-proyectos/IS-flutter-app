@@ -48,7 +48,8 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
             children: [
               GestureDetector(
                   onTap: () {
-                    //Pendiente
+                    Provider.of<ProviderProducts>(ctx, listen: false).setCategoryIdsFilter([ product.category.id]);
+                    ctx.go('/products');cd de 
                   },
                   child: Padding(
                       padding: EdgeInsets.only(left: 45),
@@ -66,7 +67,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
               ),
               GestureDetector(
                   onTap: () {
-                    //Pendiente
+
                   },
                   child: Padding(
                       padding: EdgeInsets.only(left: 8),
@@ -77,7 +78,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
             ],
           ),
           Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Center(
                 child: Container(
                   width: 280,

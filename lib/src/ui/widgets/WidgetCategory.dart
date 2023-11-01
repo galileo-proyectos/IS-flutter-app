@@ -23,7 +23,7 @@ class WidgetCategory extends StatelessWidget {
               height: 130,
               width: double.infinity,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(13))
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
               ),
               child: Stack(
                   children: [
