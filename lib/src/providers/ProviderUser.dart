@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:multi_screen_app/src/models/ApiResponse.dart';
 import 'package:multi_screen_app/src/providers/BaseAPI.dart';
 import 'package:multi_screen_app/src/models/ModelUser.dart';
@@ -8,6 +9,9 @@ import 'dart:convert';
 class ProviderUser extends ChangeNotifier {
   bool _loading = false;
   ModelUser _user;
+  static const storage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true)
+  );
 
   ProviderUser(): _user = ModelUser.notSignedIn();
 
@@ -25,6 +29,8 @@ class ProviderUser extends ChangeNotifier {
     final response = ApiResponse.fromJson(jsonDecode(httpResult.body));
     if (response.isSuccess()) {
       _user = ModelUser(response.results);
+
+      await storage.write(key: 'jwt', value: _user.token);
       return null;
     }
 
@@ -50,6 +56,10 @@ class ProviderUser extends ChangeNotifier {
     _loading = false;
     return response.message;
   }
+  Future<void> signOut () async {
+    _user = ModelUser.notSignedIn();
+    await storage.delete(key: 'jwt');
+  }
   Future<String?> recoveryPassword (String email) async {
     _loading = true;
 
@@ -68,6 +78,16 @@ class ProviderUser extends ChangeNotifier {
 
     _loading = false;
     return response.message;
+  }
+  Future<bool> testStoredJWT() async {
+    String? jwt = await storage.read(key: 'jwt');
+
+    if (jwt != null) {
+      _user = ModelUser(jwt);
+      return true;
+    }
+
+    return false;
   }
 
   bool isLoading () => _loading;

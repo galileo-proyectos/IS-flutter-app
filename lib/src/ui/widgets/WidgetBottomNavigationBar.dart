@@ -13,7 +13,7 @@ class WidgetBottomNavigationBar extends StatelessWidget {
       onDestinationSelected: (int index) {
         switch(index){
           case 0:
-            ctx.go('/');
+            ctx.go('/home');
             break;
           case 1:
             ctx.go('/scanner');

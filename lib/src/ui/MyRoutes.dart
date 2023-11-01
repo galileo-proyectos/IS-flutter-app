@@ -4,6 +4,7 @@ import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
 import 'package:multi_screen_app/src/providers/ProviderLoading.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/providers/ProviderPromotions.dart';
+import 'package:multi_screen_app/src/ui/ScreenSplash.dart';
 import 'package:multi_screen_app/src/ui/account/AccountDetail.dart';
 import 'package:multi_screen_app/src/ui/account/AccountEdit.dart';
 import 'package:multi_screen_app/src/ui/auth/SignIn.dart';
@@ -28,7 +29,7 @@ import 'package:provider/provider.dart';
 
 class MyRoutes {
 
-  static const _initialLocation = '/products';
+  static const _initialLocation = '/';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
@@ -58,7 +59,7 @@ class MyRoutes {
             builder: (context, state) => const ScreenPay()
           ),
           GoRoute(
-              path: '/',
+              path: '/home',
               builder: (context, state) => ChangeNotifierProvider(
                 create: (ctx) => ProviderPromotions(ctx),
                 child: const ScreenHome(),
@@ -116,6 +117,10 @@ class MyRoutes {
               builder: (context, state) => ScreenUserRecovery()
           )
         ]
+      ),
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const ScreenSplash()
       )
     ]
   );

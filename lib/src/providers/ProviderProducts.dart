@@ -25,34 +25,34 @@ class ProviderProducts extends DefaultProvider {
   Future<void> fetchProducts () async {
     final String name = nameFilter.text;
     final String categoryIds = categoryIdsFilter.map((e) => e.toString()).join(',');
+    print(categoryIds);
+    print(name);
 
-    if (name.isNotEmpty || categoryIds.isNotEmpty || list.isEmpty) {
-      onLoading();
+    onLoading();
 
-      // preparing query params
-      final Map<String, String> queryParams = {};
-      if (name != null && name.isNotEmpty) {
-        queryParams['name'] = name;
-      }
-      if (categoryIds.isNotEmpty) {
-        queryParams['categoryIds'] = categoryIds;
-      }
-
-      // fetch
-      final http.Response httpResult = await http.get(
-          Uri.https(BaseAPI.authority, BaseAPI.routes['products']!, queryParams.isNotEmpty ? queryParams : null),
-          headers: BaseAPI.authHeaders(user.token)
-      );
-
-      // parse http result
-      final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
-
-      // convert to list
-      _list = response.results.map<ModelProduct>((e) => ModelProduct.fromJson(e)).toList();
-
-      offLoading();
-      notifyListeners();
+    // preparing query params
+    final Map<String, String> queryParams = {};
+    if (name != null && name.isNotEmpty) {
+      queryParams['name'] = name;
     }
+    if (categoryIds.isNotEmpty) {
+      queryParams['categoryIds'] = categoryIds;
+    }
+
+    // fetch
+    final http.Response httpResult = await http.get(
+        Uri.https(BaseAPI.authority, BaseAPI.routes['products']!, queryParams.isNotEmpty ? queryParams : null),
+        headers: BaseAPI.authHeaders(user.token)
+    );
+
+    // parse http result
+    final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
+
+    // convert to list
+    _list = response.results.map<ModelProduct>((e) => ModelProduct.fromJson(e)).toList();
+
+    offLoading();
+    notifyListeners();
   }
 
   Future<void> initProductList () async {
@@ -104,6 +104,21 @@ class ProviderProducts extends DefaultProvider {
   void setCategoryIdsFilter (List<int> ids) {
     categoryIdsFilter.clear();
     categoryIdsFilter.addAll(ids);
+    notifyListeners();
+  }
+
+  void addCategoryIdsFilter (int id) {
+    if (!categoryIdsFilter.contains(id)) {
+      categoryIdsFilter.add(id);
+      notifyListeners();
+    }
+  }
+
+  void removeCategoryIdsFilter (int id) {
+    if (categoryIdsFilter.contains(id)) {
+      categoryIdsFilter.remove(id);
+      notifyListeners();
+    }
   }
 
   UnmodifiableListView<ModelProduct> get list => UnmodifiableListView(_list);
