@@ -16,7 +16,16 @@ class ScreenProductList extends StatefulWidget {
 class _ScreenProductListState extends State<ScreenProductList> {
   @override
   void initState() {
+    // hide magnify icon
+    Provider.of<ProviderProducts>(context, listen: false).setShowMagnifyIcon(false);
+
     Provider.of<ProviderProducts>(context, listen: false).initProductList();
+  }
+
+  @override
+  void deactivate () {
+    // show magnify icon
+    // Provider.of<ProviderProducts>(context, listen: false).setShowMagnifyIcon(true);
   }
 
   @override

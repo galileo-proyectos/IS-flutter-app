@@ -54,7 +54,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
               GestureDetector(
                   onTap: () {
                     Provider.of<ProviderProducts>(ctx, listen: false).setCategoryIdsFilter([ product.category.id]);
-                    ctx.go('/products');cd de 
+                    ctx.go('/products');
                   },
                   child: Padding(
                       padding: EdgeInsets.only(left: 45),
