@@ -8,24 +8,26 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
-
   Widget build(BuildContext ctx) {
     bool visible = true;
     return AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
-        toolbarHeight: 200,
+        toolbarHeight: 70,
         actions: [
           IconButton(
               onPressed: () {
                 ctx.go('/products');
               },
-              icon: const Icon(Icons.search_rounded, color: MyStyles.orange, size: 35,))
+              icon: const Icon(
+                Icons.search_rounded,
+                color: MyStyles.orange,
+                size: 35,
+              ))
         ],
-        title: Center(
-            child: Padding(
-          padding: const EdgeInsets.all(20.0),
+        title: Align(
+          alignment: Alignment.center,
           child: Image.asset("lib/src/assets/img/logo-horizontal-letras.png",
-              width: 166, height: 40),
-        )));
+              width: 150, height: 35),
+        ));
   }
 }

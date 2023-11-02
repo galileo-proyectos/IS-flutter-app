@@ -21,6 +21,7 @@ class _ScreenHomeState extends State<ScreenHome> {
     Provider.of<ProviderCategories>(context, listen: false).fetchCategories();
     Provider.of<ProviderPromotions>(context, listen: false).fetchPromotions();
   }
+
   @override
   Widget build(BuildContext ctx) {
     // CHANGE YOUR CODE HERE
@@ -28,84 +29,99 @@ class _ScreenHomeState extends State<ScreenHome> {
     // but first go to check above messages
     return SingleChildScrollView(
         child: Column(children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          child: const Padding(
-            padding: EdgeInsets.only(top: 25, left: 25),
-            child: Text("Promociones", style: MyStyles.h3),
-          ),
+      Container(
+        alignment: Alignment.centerLeft,
+        child: const Padding(
+          padding: EdgeInsets.only(top: 25, left: 25),
+          child: Text("Promociones", style: MyStyles.h3),
         ),
+      ),
+      Consumer<ProviderPromotions>(builder: (ctx, provider, child) {
+        if (provider.isLoading()) {
+          // here you can show a loading status
+          // CHANGE YOUR CODE HERE
+          return const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Loading...", style: MyStyles.h4),
+              Padding(
+                padding: EdgeInsets.only(top: 15),
+                child: CircularProgressIndicator(color: MyStyles.orange),
+              )
+            ],
+          );
+        } else {
+          // here you can construct your category list
+          // to finished just return the widget u want to show
+          // CHANGE YOUR CODE HERE
+          final List<String> imgList = [];
 
-          Consumer<ProviderPromotions>(builder: (ctx, provider, child) {
-            if (provider.isLoading()) {
-              // here you can show a loading status
-              // CHANGE YOUR CODE HERE
-              return Text('loading...');
-            } else {
-              // here you can construct your category list
-              // to finished just return the widget u want to show
-              // CHANGE YOUR CODE HERE
-              final List<String> imgList = [];
+          for (final promotion in provider.list) {
+            imgList.add(promotion.imageURL);
+          }
 
-              for (final promotion in provider.list) {
-                imgList.add(promotion.imageURL);
-              }
-
-              return CarouselSlider(
-                options: CarouselOptions(
-                  autoPlay: true,
-                  height: 400,
-                  enlargeCenterPage: true,
-                ),
-                items: imgList
-                    .map((item) => Container(
-                    child: Center(
+          return CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: true,
+              height: 400,
+              enlargeCenterPage: true,
+            ),
+            items: imgList
+                .map((item) => Container(
+                        child: Center(
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(15.0),
                           child: Image.network(item,
                               fit: BoxFit.cover, width: 270)),
                     )))
-                    .toList(),
-              );
-            }
-          }),
-
-        Container(
-          alignment: Alignment.centerLeft,
-          child: const Padding(
-            padding: EdgeInsets.only(top: 25, left: 25),
-            child: Text("¿Qué deseas comprar hoy?", style: MyStyles.h3),
-          ),
+                .toList(),
+          );
+        }
+      }),
+      Container(
+        alignment: Alignment.centerLeft,
+        child: const Padding(
+          padding: EdgeInsets.only(top: 25, left: 25),
+          child: Text("¿Qué deseas comprar hoy?", style: MyStyles.h3),
         ),
-        Consumer<ProviderCategories>(builder: (ctx, provider, child) {
-          if (provider.isLoading()) {
-            // here you can show a loading status
-            // CHANGE YOUR CODE HERE
-            return const Text('loading...');
-          } else {
-            // here you can construct your category list
-            // to finished just return the widget u want to show
-            // CHANGE YOUR CODE HERE
-            final List<WidgetCategory> widgetList = [];
+      ),
+      Consumer<ProviderCategories>(builder: (ctx, provider, child) {
+        if (provider.isLoading()) {
+          // here you can show a loading status
+          // CHANGE YOUR CODE HERE
+          return const Padding(
+              padding: EdgeInsets.only(top: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Loading...", style: MyStyles.h4),
+                  Padding(
+                    padding: EdgeInsets.only(top: 15),
+                    child: CircularProgressIndicator(color: MyStyles.orange),
+                  )
+                ],
+              ));
+        } else {
+          // here you can construct your category list
+          // to finished just return the widget u want to show
+          // CHANGE YOUR CODE HERE
+          final List<WidgetCategory> widgetList = [];
 
-            for (final category in provider.list) {
-              widgetList.add(WidgetCategory(
+          for (final category in provider.list) {
+            widgetList.add(WidgetCategory(
                 name: category.name,
                 urlImg: category.imageURL,
                 onTap: () {
-                  Provider.of<ProviderProducts>(ctx, listen: false).setCategoryIdsFilter([category.id]);
+                  Provider.of<ProviderProducts>(ctx, listen: false)
+                      .setCategoryIdsFilter([category.id]);
                   ctx.go('/products');
-                }
-              ));
-            }
-
-            return Column(children: widgetList);
+                }));
           }
-        }),
-          const Padding(
-            padding: EdgeInsets.all(20)
-          )
-      ])
-    );
+
+          return Column(children: widgetList);
+        }
+      }),
+      const Padding(padding: EdgeInsets.all(20))
+    ]));
   }
 }

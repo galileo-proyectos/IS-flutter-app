@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetCounter.dart';
 import 'package:provider/provider.dart';
 
 class ScreenProductDetail extends StatefulWidget {
@@ -18,13 +19,14 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
   late final ModelProduct product;
 
   @override
-  void initState () {
+  void initState() {
     // read product
-    product = Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
+    product =
+        Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
   }
 
   @override
-  void deactivate () {
+  void deactivate() {
     // clear product
     Provider.of<ProviderProducts>(context, listen: false).unselectProduct();
   }
@@ -53,7 +55,8 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
             children: [
               GestureDetector(
                   onTap: () {
-                    Provider.of<ProviderProducts>(ctx, listen: false).setCategoryIdsFilter([ product.category.id]);
+                    Provider.of<ProviderProducts>(ctx, listen: false)
+                        .setCategoryIdsFilter([product.category.id]);
                     ctx.go('/products');
                   },
                   child: Padding(
@@ -71,9 +74,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                 ),
               ),
               GestureDetector(
-                  onTap: () {
-
-                  },
+                  onTap: () {},
                   child: Padding(
                       padding: EdgeInsets.only(left: 8),
                       child: Text(
@@ -134,31 +135,86 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
               ),
             ),
           ),
-          Center(
-            child: Container(
-              width: 150,
-              child: Padding(
-                padding: EdgeInsets.only(top: 10, left: 5),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("Pasillo: ", style: MyStyles.h4_orange,),
-                        Text(product.aisle.name, style: TextStyle(fontSize: 16),)
-                      ],
+          Visibility(
+              visible: !Provider.of<ProviderProducts>(ctx, listen: false)
+                  .isProductScanned,
+              child: Center(
+                child: Container(
+                  width: 150,
+                  child: Padding(
+                      padding: EdgeInsets.only(top: 10, left: 5, bottom: 25),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Pasillo: ",
+                                style: MyStyles.h4_orange,
+                              ),
+                              Text(
+                                product.aisle.name,
+                                style: TextStyle(fontSize: 16),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Stock: ",
+                                style: MyStyles.h4_orange,
+                              ),
+                              Text(
+                                "  ${product.stock}",
+                                style: TextStyle(fontSize: 16),
+                              )
+                            ],
+                          ),
+                        ],
+                      )),
+                ),
+              )),
+          Visibility(
+            visible: Provider.of<ProviderProducts>(ctx, listen: false)
+                .isProductScanned,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const WidgetCounter(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          side: BorderSide(width: 1, color: MyStyles.orange),
+                        ),
+                      ),
+                      backgroundColor: MaterialStateProperty.all(
+                          Colors.white), // Cambia el color de fondo a blanco
                     ),
-                    Row(
-                      children: [
-                        Text("Stock: ", style: MyStyles.h4_orange,),
-                        Text("  ${product.stock}", style: TextStyle(fontSize: 16),)
-                      ],
+                    child: const SizedBox(
+                      width: 275,
+                      height: 55,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.shopping_cart_outlined,
+                            size: 24.0,
+                            color: MyStyles.orange,
+                          ),
+                          Text(
+                            "Agregar al carrito",
+                            style: TextStyle(color: MyStyles.orange),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                )
-              ),
-            ),
+                  )
+                ]),
           )
-
         ]));
   }
 }
