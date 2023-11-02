@@ -187,42 +187,100 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                       widget.quantity = counter;
                     },
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Provider.of<ProviderCart>(ctx, listen: false).addDetail(
-                          product, widget.quantity.toDouble());
-                    },
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                          side: const BorderSide(
-                              width: 1, color: MyStyles.orange),
-                        ),
-                      ),
-                      backgroundColor: MaterialStateProperty.all(
-                          Colors.white), // Cambia el color de fondo a blanco
+
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 15),
+                    child: Column(
+                      children: [
+                        Visibility(
+                            visible: false,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Provider.of<ProviderCart>(ctx, listen: false)
+                                    .addDetail(product, widget.quantity.toDouble());
+                              },
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    side: const BorderSide(
+                                        width: 1, color: MyStyles.orange),
+                                  ),
+                                ),
+                                backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                              ),
+                              child: const Column(
+                                children: [
+                                  SizedBox(
+                                    width: 275,
+                                    height: 55,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.shopping_cart_outlined,
+                                          size: 24.0,
+                                          color: MyStyles.orange,
+                                        ),
+                                        Text(
+                                          "Agregar al carrito",
+                                          style: TextStyle(color: MyStyles.orange),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )),
+                        Visibility(
+                            visible: true,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Provider.of<ProviderCart>(ctx, listen: false)
+                                    .addDetail(
+                                    product, widget.quantity.toDouble());
+                              },
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+
+                                  ),
+                                ),
+                                backgroundColor:
+                                MaterialStateProperty.all(MyStyles.orange),
+                              ),
+                              child: const Column(
+                                children: [
+                                  SizedBox(
+                                    width: 275,
+                                    height: 55,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.check_rounded,
+                                          size: 24.0,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          "Añadido al carrito",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ))
+                      ],
                     ),
-                    child: const SizedBox(
-                      width: 275,
-                      height: 55,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.shopping_cart_outlined,
-                            size: 24.0,
-                            color: MyStyles.orange,
-                          ),
-                          Text(
-                            "Agregar al carrito",
-                            style: TextStyle(color: MyStyles.orange),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
+                  ),
+
                 ]),
           )
         ]));
