@@ -16,6 +16,7 @@ class ProviderProducts extends DefaultProvider {
   final List<int> categoryIdsFilter = [];
   bool _isProductScanned = false;
 
+  // ui
   bool _showFilters = false;
 
   ProviderProducts(super.ctx);
@@ -96,15 +97,6 @@ class ProviderProducts extends DefaultProvider {
     _isProductScanned = false;
   }
 
-  // this is for ui
-  bool get showFilters => _showFilters;
-  void setShowFilters (bool value) {
-    if (_showFilters != value) {
-      _showFilters = value;
-      notifyListeners();
-    }
-  }
-
   void setCategoryIdsFilter (List<int> ids) {
     categoryIdsFilter.clear();
     categoryIdsFilter.addAll(ids);
@@ -126,4 +118,14 @@ class ProviderProducts extends DefaultProvider {
   }
 
   UnmodifiableListView<ModelProduct> get list => UnmodifiableListView(_list);
+
+  // ==== this is for ui ====
+  bool get showFilters => _showFilters;
+  void setShowFilters (bool value) {
+    if (_showFilters != value) {
+      _showFilters = value;
+      notifyListeners();
+    }
+  }
+// ========================
 }
