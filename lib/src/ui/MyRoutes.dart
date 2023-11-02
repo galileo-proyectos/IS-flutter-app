@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/providers/ProviderCart.dart';
 import 'package:multi_screen_app/src/providers/ProviderCategories.dart';
 import 'package:multi_screen_app/src/providers/ProviderLoading.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
@@ -66,7 +67,7 @@ class MyRoutes {
           ),
           GoRoute(
             path: '/products/details',
-            builder: (context, state) => const ScreenProductDetail()
+            builder: (context, state) =>  ScreenProductDetail()
           ),
           GoRoute(
             path: '/products',
@@ -135,6 +136,9 @@ class MyRoutes {
         ),
         ChangeNotifierProvider<ProviderLoading>(
             create: (ctx) => ProviderLoading()
+        ),
+        ChangeNotifierProvider<ProviderCart>(
+            create: (ctx) => ProviderCart(ctx)
         )
       ],
       child: Scaffold(

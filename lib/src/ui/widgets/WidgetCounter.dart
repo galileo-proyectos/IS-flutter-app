@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 
 class WidgetCounter extends StatefulWidget {
-  // this code will be used for finding the product
-  const WidgetCounter({super.key});
-
+  final Function(int counter) onChanged;
+  const WidgetCounter({super.key, required this.onChanged});
   @override
   State<WidgetCounter> createState() => _WidgetCounterState();
 }
 
 class _WidgetCounterState extends State<WidgetCounter> {
-  int _counter = 5;
+  int _counter = 1;
 
   void _increment() {
     setState(() {
       _counter++;
     });
+    widget.onChanged(_counter);
   }
 
   void _decrement() {
@@ -24,6 +24,7 @@ class _WidgetCounterState extends State<WidgetCounter> {
         _counter--;
       }
     });
+    widget.onChanged(_counter);
   }
 
   @override

@@ -1,15 +1,23 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:multi_screen_app/src/providers/ProviderCart.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
+import 'package:provider/provider.dart';
 
 class WidgetCartProduct extends StatefulWidget {
   WidgetCartProduct(
       {super.key,
       required this.imageURL,
       required this.name,
-      required this.price});
+      required this.price,
+      required this.index,
+      required this.quatity});
   String imageURL;
   String name;
-  String price;
+  double price;
+  int index;
+  double quatity;
 
   @override
   State<WidgetCartProduct> createState() => _WidgetCartProduct();
@@ -20,7 +28,7 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
   void initState() {}
   Widget build(BuildContext ctx) {
     return Padding(
-      padding: EdgeInsets.only(left: 35, right: 35, top: 5),
+      padding: EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 115,
@@ -74,32 +82,41 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5, left: 15),
-                    child: Text(
-                      'Q ${widget.price}',
-                      style: MyStyles.price,
-                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Q ${widget.price} ',
+                          style: MyStyles.price,
+                        ),
+                        Text(
+                          'x ${widget.quatity}',
+                          style: TextStyle(color: MyStyles.orange, fontSize: 11, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    )
                   )
                 ],
               ),
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.close,
-                      size: 15,
-                      color: Color(0xFFC7C7C7),
-                    )),
-                const Expanded(child: Center()),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 15,
-                      color: MyStyles.purple,
-                    )),
-              ]),
-
+              IconButton(
+                  onPressed: () {
+                    Provider.of<ProviderCart>(ctx, listen: false).removeAt(widget.index);
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    size: 15,
+                    color: Color(0xFFC7C7C7),
+                  )),
+              const Expanded(child: Center()),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 15,
+                    color: MyStyles.purple,
+                  )),
+            ]),
           ],
         ),
       ),

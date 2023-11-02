@@ -63,7 +63,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
             width: MediaQuery.of(ctx).size.width,
             alignment: Alignment.centerRight,
             child: Padding(
-              padding: EdgeInsets.only(right: 5,),
+              padding: const EdgeInsets.only(right: 5,),
               child: IconButton(
                   icon: const Icon(Icons.filter_alt,
                       size: 25, color: MyStyles.orange),
@@ -82,9 +82,8 @@ class _ScreenProductListState extends State<ScreenProductList> {
             if (provider.isLoading()) {
               // here you can show a loading status
               // CHANGE YOUR CODE HERE
-              return SizedBox(
-                height: MediaQuery.of(ctx).size.height * 0.5,
-                child: const Column(
+              return const SizedBox(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Loading...", style: MyStyles.h2),

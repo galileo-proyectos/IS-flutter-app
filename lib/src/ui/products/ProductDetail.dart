@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
+import 'package:multi_screen_app/src/providers/ProviderCart.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetCounter.dart';
 import 'package:provider/provider.dart';
 
 class ScreenProductDetail extends StatefulWidget {
-  // this code will be used for finding the product
-  const ScreenProductDetail({super.key});
+  int quantity = 1;
+  ScreenProductDetail({super.key});
 
   @override
   State<ScreenProductDetail> createState() => _ScreenProductDetailState();
@@ -127,10 +128,10 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 10),
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
             child: Center(
               child: Text(
-                "Q${product.price}",
+                "Q${product.price.toStringAsFixed(2)}",
                 style: MyStyles.h3,
               ),
             ),
@@ -139,33 +140,34 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
               visible: !Provider.of<ProviderProducts>(ctx, listen: false)
                   .isProductScanned,
               child: Center(
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   child: Padding(
-                      padding: EdgeInsets.only(top: 10, left: 5, bottom: 25),
+                      padding:
+                          const EdgeInsets.only(top: 10, left: 5, bottom: 25),
                       child: Column(
                         children: [
                           Row(
                             children: [
-                              Text(
+                              const Text(
                                 "Pasillo: ",
                                 style: MyStyles.h4_orange,
                               ),
                               Text(
                                 product.aisle.name,
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               )
                             ],
                           ),
                           Row(
                             children: [
-                              Text(
+                              const Text(
                                 "Stock: ",
                                 style: MyStyles.h4_orange,
                               ),
                               Text(
                                 "  ${product.stock}",
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               )
                             ],
                           ),
@@ -174,20 +176,28 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                 ),
               )),
           Visibility(
-            visible: Provider.of<ProviderProducts>(ctx, listen: false)
-                .isProductScanned,
+            visible:
+                true, //Provider.of<ProviderProducts>(ctx, listen: false).isProductScanned,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const WidgetCounter(),
+                  WidgetCounter(
+                    onChanged: (int counter) {
+                      widget.quantity = counter;
+                    },
+                  ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<ProviderCart>(ctx, listen: false).addDetail(
+                          product, widget.quantity.toDouble());
+                    },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
-                          side: BorderSide(width: 1, color: MyStyles.orange),
+                          side: const BorderSide(
+                              width: 1, color: MyStyles.orange),
                         ),
                       ),
                       backgroundColor: MaterialStateProperty.all(

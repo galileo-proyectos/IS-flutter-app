@@ -8,6 +8,7 @@ class ModelCart {
   CartConsumer _consumer = CartConsumer.defaultConsumer;
   CartCard _card = CartCard.defaultCard;
   final List<CartDetail> _details = [];
+  double _discount = 0;
   double _total = 0;
 
   // details
@@ -55,6 +56,7 @@ class ModelCart {
   }
 
   // total
+  double get discount => _discount;
   double get total => _total;
 }
 

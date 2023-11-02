@@ -40,10 +40,10 @@ class _ScreenHomeState extends State<ScreenHome> {
         if (provider.isLoading()) {
           // here you can show a loading status
           // CHANGE YOUR CODE HERE
-          return const Column(
+          return  const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Loading...", style: MyStyles.h4),
+             Text("Loading...", style: MyStyles.h4),
               Padding(
                 padding: EdgeInsets.only(top: 15),
                 child: CircularProgressIndicator(color: MyStyles.orange),

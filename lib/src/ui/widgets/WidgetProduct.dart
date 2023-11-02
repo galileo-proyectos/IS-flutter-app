@@ -61,7 +61,7 @@ class WidgetProduct extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ))),
                 Text(
-                  "Q${product.price}",
+                  "Q${product.price.toStringAsFixed(2)}",
                   style: MyStyles.price,
                 ),
                 ElevatedButton(

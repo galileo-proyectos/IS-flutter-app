@@ -31,6 +31,10 @@ class MyStyles {
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
+  static const TextStyle h4_black = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
   static const TextStyle h4_orange = TextStyle(
     color: orange,
     fontSize: 16,
