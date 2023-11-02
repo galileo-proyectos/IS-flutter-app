@@ -5,15 +5,21 @@ import 'package:multi_screen_app/src/models/ModelCart.dart';
 class ProviderCart extends DefaultProvider {
   final ModelCart _cart = ModelCart();
 
+  ModelProduct? _selectedProduct;
+  bool _isProductScanned = false;
+  bool _isProductInCart = false;
+
   ProviderCart(super.ctx);
 
   ModelCart get cart => _cart;
 
   List<CartDetail> get details => _cart.details;
 
-  void addDetail (ModelProduct product, double quantity) {
-    if (!isInCart(product)) {
-      _cart.addDetail(product, quantity);
+  // === cart methods ===
+  void addDetail (double quantity) {
+    if (!isInCart(_selectedProduct!)) {
+      _cart.addDetail(_selectedProduct!, quantity);
+      _isProductInCart = true;
       notifyListeners();
     }
   }
@@ -28,6 +34,27 @@ class ProviderCart extends DefaultProvider {
   bool isInCart (ModelProduct product) {
     return _cart.isInCart(product);
   }
+  // ====================
+
+  // === selected product methods ===
+  bool get isProductScanned => _isProductScanned;
+  ModelProduct get selectedProduct {
+    if (_selectedProduct != null) {
+      return _selectedProduct!;
+    }
+    throw ArgumentError('not selected product found');
+  }
+  void selectProduct (ModelProduct product, { bool isScanned = false }) {
+    _selectedProduct = product;
+    _isProductScanned = isScanned;
+    _isProductInCart = isInCart(product);
+  }
+  void unselectProduct () {
+    _selectedProduct = null;
+    _isProductScanned = false;
+    _isProductInCart = false;
+  }
+  // ================================
 
   void setConsumer (String businessName, String nit) {
     _cart.setConsumer(businessName, nit);

@@ -9,12 +9,10 @@ import 'dart:convert';
 
 class ProviderProducts extends DefaultProvider {
   List<ModelProduct> _list = [];
-  ModelProduct? _selectedProduct;
 
   // filters
   final TextEditingController nameFilter = TextEditingController();
   final List<int> categoryIdsFilter = [];
-  bool _isProductScanned = false;
 
   // ui
   bool _showFilters = false;
@@ -58,7 +56,7 @@ class ProviderProducts extends DefaultProvider {
     }
   }
 
-  Future<bool> fetchAndSelectProduct (String productCode) async {
+  Future<ModelProduct?> fetchProduct (String productCode) async {
     onLoading();
 
     // fetch
@@ -68,33 +66,15 @@ class ProviderProducts extends DefaultProvider {
     );
 
     // parse http result
-    final ApiResponse response =  ApiResponse.fromJson(jsonDecode(httpResult.body));
+    final ApiResponse response = ApiResponse.fromJson(jsonDecode(httpResult.body));
 
     // convert to list
-    if (response.isSuccess()) {
-      _selectedProduct = ModelProduct.fromJson(response.results);
-      _isProductScanned = true;
-    }
-
     offLoading();
-    notifyListeners();
-    return response.isSuccess();
-  }
-
-  bool get isProductScanned => _isProductScanned;
-  ModelProduct get selectedProduct {
-    if (_selectedProduct != null) {
-      return _selectedProduct!;
+    if (response.isSuccess()) {
+      return ModelProduct.fromJson(response.results);
+    } else {
+      return null;
     }
-    throw ArgumentError('not selected product found');
-  }
-  void selectProduct (ModelProduct product, { bool isScanned = false }) {
-    _selectedProduct = product;
-    _isProductScanned = isScanned;
-  }
-  void unselectProduct () {
-    _selectedProduct = null;
-    _isProductScanned = false;
   }
 
   void setCategoryIdsFilter (List<int> ids) {

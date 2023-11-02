@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/providers/ProviderCart.dart';
 import 'package:multi_screen_app/src/providers/ProviderLoading.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
@@ -111,7 +112,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
                       // will have thousands of products... this is faster :D
 
                       // first you have to selected the product
-                      Provider.of<ProviderProducts>(context, listen: false)
+                      Provider.of<ProviderCart>(context, listen: false)
                           .selectProduct(product);
                       // the you can show it's details.
                       ctx.go('/products/details');

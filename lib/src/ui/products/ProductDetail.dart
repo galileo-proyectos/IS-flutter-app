@@ -23,13 +23,13 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
   void initState() {
     // read product
     product =
-        Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
+        Provider.of<ProviderCart>(context, listen: false).selectedProduct;
   }
 
   @override
   void deactivate() {
     // clear product
-    Provider.of<ProviderProducts>(context, listen: false).unselectProduct();
+    Provider.of<ProviderCart>(context, listen: false).unselectProduct();
   }
 
   @override
@@ -137,8 +137,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
             ),
           ),
           Visibility(
-              visible: !Provider.of<ProviderProducts>(ctx, listen: false)
-                  .isProductScanned,
+              visible: !Provider.of<ProviderCart>(ctx, listen: false).isProductScanned,
               child: Center(
                 child: SizedBox(
                   width: 150,
@@ -177,7 +176,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
               )),
           Visibility(
             visible:
-                true, //Provider.of<ProviderProducts>(ctx, listen: false).isProductScanned,
+                true, //Provider.of<ProviderCart>(ctx, listen: false).isProductScanned,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -189,8 +188,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Provider.of<ProviderCart>(ctx, listen: false).addDetail(
-                          product, widget.quantity.toDouble());
+                      Provider.of<ProviderCart>(ctx, listen: false).addDetail(widget.quantity.toDouble());
                     },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(
