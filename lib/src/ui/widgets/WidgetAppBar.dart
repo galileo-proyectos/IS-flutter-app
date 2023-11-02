@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
+import 'package:provider/provider.dart';
 
 class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WidgetAppBar({super.key});
@@ -9,20 +11,21 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext ctx) {
-    bool visible = true;
     return AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
         toolbarHeight: 70,
         actions: [
-          IconButton(
-              onPressed: () {
-                ctx.go('/products');
-              },
-              icon: const Icon(
-                Icons.search_rounded,
-                color: MyStyles.orange,
-                size: 35,
-              ))
+          Consumer<ProviderProducts>(builder: (context, provider, _) {
+            return IconButton(
+                onPressed: () {
+                  context.go('/products');
+                },
+                icon: const Icon(
+                  Icons.search_rounded,
+                  color: MyStyles.orange,
+                  size: 35,
+                ));
+          })
         ],
         title: Align(
           alignment: Alignment.center,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/providers/ProviderLoading.dart';
 import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetProduct.dart';
@@ -15,17 +16,8 @@ class ScreenProductList extends StatefulWidget {
 
 class _ScreenProductListState extends State<ScreenProductList> {
   @override
-  void initState() {
-    // hide magnify icon
-    Provider.of<ProviderProducts>(context, listen: false).setShowMagnifyIcon(false);
-
+  void initState () {
     Provider.of<ProviderProducts>(context, listen: false).initProductList();
-  }
-
-  @override
-  void deactivate () {
-    // show magnify icon
-    // Provider.of<ProviderProducts>(context, listen: false).setShowMagnifyIcon(true);
   }
 
   @override

@@ -139,24 +139,7 @@ class MyRoutes {
       ],
       child: Scaffold(
         appBar: const WidgetAppBar(),
-        body: Stack(
-          children: [
-            Consumer<ProviderLoading>(builder: (ctx, provider, child) {
-              if (provider.isLoading) {
-                return Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                  )
-                );
-              } else {
-                return Container();
-              }
-            }),
-            child
-          ]
-        ),
+        body: child,
         bottomNavigationBar: const WidgetBottomNavigationBar(),
       )
     );

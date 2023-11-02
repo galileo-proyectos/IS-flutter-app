@@ -18,7 +18,6 @@ class ProviderProducts extends DefaultProvider {
 
   // ui
   bool _showFilters = false;
-  bool _showMagnifyIcon = true;
 
   ProviderProducts(super.ctx);
 
@@ -125,14 +124,6 @@ class ProviderProducts extends DefaultProvider {
   void setShowFilters (bool value) {
     if (_showFilters != value) {
       _showFilters = value;
-      notifyListeners();
-    }
-  }
-
-  bool get showMagnifyIcon => _showMagnifyIcon;
-  void setShowMagnifyIcon (bool value) {
-    if (_showMagnifyIcon != value) {
-      _showMagnifyIcon = value;
       notifyListeners();
     }
   }
