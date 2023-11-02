@@ -12,8 +12,10 @@ class ProviderCart extends DefaultProvider {
   List<CartDetail> get details => _cart.details;
 
   void addDetail (ModelProduct product, double quantity) {
-    _cart.addDetail(product, quantity);
-    notifyListeners();
+    if (!isInCart(product)) {
+      _cart.addDetail(product, quantity);
+      notifyListeners();
+    }
   }
   void removeAt (int index) {
     _cart.removeAt(index);
