@@ -38,6 +38,7 @@ class ProviderCart extends DefaultProvider {
 
   // === selected product methods ===
   bool get isProductScanned => _isProductScanned;
+  bool get isProductInCart => _isProductInCart;
   ModelProduct get selectedProduct {
     if (_selectedProduct != null) {
       return _selectedProduct!;

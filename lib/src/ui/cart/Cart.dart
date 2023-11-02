@@ -41,22 +41,26 @@ class ScreenCart extends StatelessWidget {
                     child: Column(
                       children: [
                         Row(children: [
-                          Text("Productos"),
+                          const Text(
+                            "Productos",
+                            style: TextStyle(color: Color(0xFF414141)),
+                          ),
                           Expanded(
                               child: Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
-                                      "Q ${Provider.of<ProviderCart>(ctx, listen: false).cart.total.toStringAsFixed(2)}")))
+                                      "Q ${Provider.of<ProviderCart>(ctx, listen: false).cart.total.toStringAsFixed(2)}",
+                                      style: const TextStyle(color:  Color(0xFF414141)))))
                         ]),
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 5),
                           child: Row(children: [
-                            Text("Descuentos"),
+                            Text("Descuentos", style: TextStyle(color:  Color(0xFF414141))),
                             Expanded(
                                 child: Align(
                                     alignment: Alignment.centerRight,
                                     child:
-                                        Text("Q 66.55") //Cambiar por descuentos
+                                        Text("Q 66.55", style: TextStyle(color:  Color(0xFF414141))) //Cambiar por descuentos
                                     ))
                           ]),
                         ),
@@ -74,8 +78,8 @@ class ScreenCart extends StatelessWidget {
                             Expanded(
                                 child: Align(
                                     alignment: Alignment.centerRight,
-                                    child: Text("")
-                                    ))
+                                    child: Text("Q 900.00",
+                                        style: MyStyles.h4_black)))
                           ]),
                         ),
                       ],
