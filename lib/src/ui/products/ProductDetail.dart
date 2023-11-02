@@ -19,13 +19,14 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
   late final ModelProduct product;
 
   @override
-  void initState () {
+  void initState() {
     // read product
-    product = Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
+    product =
+        Provider.of<ProviderProducts>(context, listen: false).selectedProduct;
   }
 
   @override
-  void deactivate () {
+  void deactivate() {
     // clear product
     Provider.of<ProviderProducts>(context, listen: false).unselectProduct();
   }
@@ -135,12 +136,13 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
             ),
           ),
           Visibility(
-              visible: !Provider.of<ProviderProducts>(ctx, listen: false).isProductScanned,
+              visible: !Provider.of<ProviderProducts>(ctx, listen: false)
+                  .isProductScanned,
               child: Center(
                 child: Container(
                   width: 150,
                   child: Padding(
-                      padding: EdgeInsets.only(top: 10, left: 5),
+                      padding: EdgeInsets.only(top: 10, left: 5, bottom: 25),
                       child: Column(
                         children: [
                           Row(
@@ -171,17 +173,16 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                       )),
                 ),
               )),
-         Visibility(
-            visible:  Provider.of<ProviderProducts>(ctx, listen: false).isProductScanned,
+          Visibility(
+            visible: Provider.of<ProviderProducts>(ctx, listen: false)
+                .isProductScanned,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const WidgetCounter(),
                   ElevatedButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
@@ -189,7 +190,8 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                           side: BorderSide(width: 1, color: MyStyles.orange),
                         ),
                       ),
-                      backgroundColor: MaterialStateProperty.all(Colors.white), // Cambia el color de fondo a blanco
+                      backgroundColor: MaterialStateProperty.all(
+                          Colors.white), // Cambia el color de fondo a blanco
                     ),
                     child: const SizedBox(
                       width: 275,
@@ -203,7 +205,10 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                             size: 24.0,
                             color: MyStyles.orange,
                           ),
-                          Text("Agregar al carrito", style: TextStyle(color: MyStyles.orange),),
+                          Text(
+                            "Agregar al carrito",
+                            style: TextStyle(color: MyStyles.orange),
+                          ),
                         ],
                       ),
                     ),
