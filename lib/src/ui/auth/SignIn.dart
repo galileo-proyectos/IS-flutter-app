@@ -130,31 +130,30 @@ class ScreenSignIn extends StatelessWidget {
                         ),
                       ),
                       onTap: () async {
-                        ctx.go('/auth/recovery-password');
+                        ctx.push('/auth/recovery-password');
                       },
                     )),
                 Container(
                     padding: const EdgeInsets.only(top: 20),
                     child: Center(
                       child: ElevatedButton(
-                          child: Text('Iniciar Sesión'),
-                          style: MyStyles.buttonStyle,
-                          // CHANGE YOUR CODE HERE
-                          onPressed: () async {
-                            // this instruction invokes signIn process
-                            String? errMessage =
-                                await Provider.of<ProviderUser>(ctx,
-                                        listen: false)
-                                    .signIn(email.text, password.text);
-                            if (errMessage == null) {
-                              // do something when sign in was success
-                              //Pendiente
-                              ctx.go('/');
-                            } else {
-                              // show an error, use errMessage
-                              WidgetMessageBox.openError(ctx, errMessage,Colors.red);
-                            }
-                          }),
+                        style: MyStyles.buttonStyle,
+                        // CHANGE YOUR CODE HERE
+                        onPressed: () async {
+                          // this instruction invokes signIn process
+                          String? errMessage =
+                              await Provider.of<ProviderUser>(ctx,
+                                      listen: false)
+                                  .signIn(email.text, password.text);
+                          if (errMessage == null) {
+                            ctx.go('/');
+                          } else {
+                            // show an error, use errMessage
+                            WidgetMessageBox.openError(ctx, errMessage,Colors.red);
+                          }
+                        },
+                        child: const Text('Iniciar Sesión'),
+                      ),
                     )),
                 Container(
                   alignment: Alignment.center,
@@ -171,7 +170,7 @@ class ScreenSignIn extends StatelessWidget {
                         // UsersSignupService.signup(signupData);
                         child: const Text("Registrarse"),
                         onPressed: () {
-                          ctx.go('/auth/signUp');
+                          ctx.push('/auth/signUp');
                         },
                         style: MyStyles.buttonStyle),
                   ),

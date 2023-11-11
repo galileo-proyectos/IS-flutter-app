@@ -196,7 +196,9 @@ class ScreenSignUp extends StatelessWidget {
               child: Row(children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 35),
-                  child: WidgetCheckBox(isChecked:false, onChanged: (value) {
+
+                  child: WidgetCheckBox(isChecked: false, onChanged: (value) {
+
                    acceptTerms = value;
                   }),
                 ),
@@ -253,11 +255,10 @@ class ScreenSignUp extends StatelessWidget {
                         // do something when sign up was success
                         // go to sign in form
 
-                        ctx.go('/auth/signUp/success');
+                        ctx.push('/auth/signUp/success');
                       } else {
                         // show an error, use errMessage
                         WidgetMessageBox.openError(ctx, errMessage,Colors.red);
-                        print(errMessage);
                       }
                     })),
             const Padding(
@@ -273,7 +274,7 @@ class ScreenSignUp extends StatelessWidget {
               child: Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    ctx.go('/auth/signIn');
+                    ctx.pop();
                   },
                   style: MyStyles.buttonStyle,
                   child: const Text("Iniciar sesión"),

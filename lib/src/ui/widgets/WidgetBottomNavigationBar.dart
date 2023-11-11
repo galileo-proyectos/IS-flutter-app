@@ -30,7 +30,7 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
             onDestinationSelected: (int index) {
               switch (index) {
                 case 0:
-                  ctx.go('/home');
+                  ctx.go('/');
                   break;
                 case 1:
                   ctx.go('/scanner');
@@ -39,7 +39,7 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
                   ctx.go('/cart');
                   break;
                 case 3:
-                  ctx.go('/user/details');
+                  ctx.go('/user');
                   break;
               }
             },

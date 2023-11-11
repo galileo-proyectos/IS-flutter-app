@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
 class WidgetCheckBox extends StatefulWidget {
-  WidgetCheckBox({ super.key, required this.onChanged, this.isChecked });
+  WidgetCheckBox({ super.key, required this.onChanged, required this.isChecked });
 
   final Function(bool value) onChanged;
-  bool? isChecked = false;
+  bool isChecked;
 
   @override
   State<WidgetCheckBox> createState() => _WidgetCheckBoxState();
 }
 
 class _WidgetCheckBoxState extends State<WidgetCheckBox> {
-
   @override
   Widget build(BuildContext context) {
     return Center(
