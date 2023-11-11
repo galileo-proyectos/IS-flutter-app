@@ -23,7 +23,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
     if (mounted) {
       if (isSignedIn) {
-        context.go('/home');
+        context.go('/');
       } else {
         context.go('/auth/SignIn');
       }

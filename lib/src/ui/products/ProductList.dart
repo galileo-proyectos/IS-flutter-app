@@ -115,7 +115,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
                       Provider.of<ProviderCart>(context, listen: false)
                           .selectProduct(product);
                       // the you can show it's details.
-                      ctx.go('/products/details');
+                      ctx.push('/products/details');
                     }));
               }
 

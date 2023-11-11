@@ -28,8 +28,7 @@ import 'package:multi_screen_app/src/ui/widgets/WidgetBottomNavigationBar.dart';
 import 'package:provider/provider.dart';
 
 class MyRoutes {
-
-  static const _initialLocation = '/home';
+  static const _initialLocation = '/';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
@@ -39,57 +38,67 @@ class MyRoutes {
         builder: _mainLayout,
         routes: [
           GoRoute(
-            path: '/user/details',
-            builder: (context, state) => const ScreenAccountDetail()
-          ),
-          GoRoute(
-            path: '/user/edit',
-            builder: (context, state) => const ScreenAccountEdit()
-          ),
-          GoRoute(
-            path: '/cart',
-            builder: (context, state) => const ScreenCart()
-          ),
-          GoRoute(
-            path: '/cart/completed',
-            builder: (context, state) => const ScreenCartCompleted()
-          ),
-          GoRoute(
-            path: '/cart/pay',
-            builder: (context, state) => const ScreenPay()
-          ),
-          GoRoute(
-              path: '/home',
+              path: '/',
               builder: (context, state) => ChangeNotifierProvider(
                 create: (ctx) => ProviderPromotions(ctx),
                 child: const ScreenHome(),
+              ),
+            routes: [
+              GoRoute(
+                path: 'products',
+                builder: (context, state) => const Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    ScreenProductList(),
+                    WidgetSlideUpFilters()
+                  ]
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'details',
+                    builder: (context, state) =>  ScreenProductDetail()
+                  )
+                ]
+              ),
+              GoRoute(
+                path: 'scanner',
+                builder: (context, state) => const ScreenScanner()
+              ),
+              GoRoute(
+                path: 'purchases',
+                builder: (context, state) => const ScreenPurchaseHistory(),
+                routes: [
+                  GoRoute(
+                    path: 'purchases/:id/id',
+                    builder: (context, state) => const ScreenPurchaseDetail()
+                  )
+                ]
+              ),
+              GoRoute(
+                path: 'cart',
+                builder: (context, state) => const ScreenCart(),
+                routes: [
+                  GoRoute(
+                    path: 'pay',
+                    builder: (context, state) => const ScreenPay()
+                  ),
+                ]
+              ),
+              GoRoute(
+                  path: 'cart/completed',
+                  builder: (context, state) => const ScreenCartCompleted()
+              ),
+              GoRoute(
+                path: 'user',
+                builder: (context, state) => const ScreenAccountDetail(),
+                routes: [
+                  GoRoute(
+                    path: 'edit',
+                    builder: (context, state) => const ScreenAccountEdit()
+                  )
+                ]
               )
-          ),
-          GoRoute(
-            path: '/products/details',
-            builder: (context, state) =>  ScreenProductDetail()
-          ),
-          GoRoute(
-            path: '/products',
-            builder: (context, state) => const Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                ScreenProductList(),
-                WidgetSlideUpFilters()
-              ]
-            )
-          ),
-          GoRoute(
-            path: '/purchases/:id/id',
-            builder: (context, state) => const ScreenPurchaseDetail()
-          ),
-          GoRoute(
-            path: '/purchases',
-            builder: (context, state) => const ScreenPurchaseHistory()
-          ),
-          GoRoute(
-              path: '/scanner',
-              builder: (context, state) => const ScreenScanner()
+            ]
           )
         ]
       ),
@@ -119,7 +128,7 @@ class MyRoutes {
         ]
       ),
       GoRoute(
-        path: '/',
+        path: '/splash',
         builder: (context, state) => const ScreenSplash()
       )
     ]
@@ -151,7 +160,6 @@ class MyRoutes {
 
   static Widget _authLayout (BuildContext context, GoRouterState state, Widget child) {
     return Scaffold(
-
       body: child
     );
   }

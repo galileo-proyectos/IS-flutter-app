@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/providers/ProviderUser.dart';
+import 'package:provider/provider.dart';
 
 class ScreenAccountDetail extends StatelessWidget {
   const ScreenAccountDetail({super.key});
@@ -16,7 +18,8 @@ class ScreenAccountDetail extends StatelessWidget {
             child: ElevatedButton(
               child: const Text('Go back'),
               onPressed: () {
-                ctx.go('/');
+                Provider.of<ProviderUser>(ctx, listen: false).signOut();
+                ctx.go('/auth/signIn');
               },
             )
         )

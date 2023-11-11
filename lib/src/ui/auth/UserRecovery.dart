@@ -84,7 +84,7 @@ class ScreenUserRecovery extends StatelessWidget {
                     .recoveryPassword(email.text);
                 if (errMessage == null) {
                   // do something when the email was sent was success
-                  ctx.go('/auth/recovery-password/success');
+                  ctx.push('/auth/recovery-password/success');
                 } else {
                   // show an error, use errMessage
                   WidgetMessageBox.openError(ctx, errMessage,Colors.red);
