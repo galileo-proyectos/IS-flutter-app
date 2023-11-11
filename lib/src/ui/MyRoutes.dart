@@ -28,7 +28,7 @@ import 'package:multi_screen_app/src/ui/widgets/WidgetBottomNavigationBar.dart';
 import 'package:provider/provider.dart';
 
 class MyRoutes {
-  static const _initialLocation = '/';
+  static const _initialLocation = '/scanner';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,

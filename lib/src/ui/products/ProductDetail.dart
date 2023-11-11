@@ -48,7 +48,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                 color: MyStyles.purple,
               ),
               onPressed: () {
-                ctx.go("/products");
+                ctx.pop();
               },
             ),
           ),

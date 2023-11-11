@@ -57,6 +57,7 @@ class ProviderProducts extends DefaultProvider {
   }
 
   Future<ModelProduct?> fetchProduct (String productCode) async {
+    print('called ${DateTime.now()}');
     onLoading();
 
     // fetch
