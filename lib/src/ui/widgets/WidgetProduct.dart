@@ -16,7 +16,7 @@ class WidgetProduct extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: Container(
           width: 150,
-          height: 240,
+          height: 250,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(13),
@@ -34,6 +34,7 @@ class WidgetProduct extends StatelessWidget {
             padding: const EdgeInsets.only(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   width: 110,
@@ -54,7 +55,7 @@ class WidgetProduct extends StatelessWidget {
                 ),
                 Flexible(
                     child: Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 5),
+                        padding: const EdgeInsets.only(top: 10, bottom: 5, left: 8, right: 8),
                         child: Text(
                           product.name,
                           style: MyStyles.subtitle,

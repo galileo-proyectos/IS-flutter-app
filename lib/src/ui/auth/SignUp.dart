@@ -184,7 +184,7 @@ class ScreenSignUp extends StatelessWidget {
               child: Row(children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 35),
-                  child: WidgetCheckBox(isChecked: false, onChanged: (value) {
+                  child: WidgetCheckBox(isChecked:false, onChanged: (value) {
                     acceptPromotions = value;
                   }),
                 ),
@@ -196,7 +196,9 @@ class ScreenSignUp extends StatelessWidget {
               child: Row(children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 35),
+
                   child: WidgetCheckBox(isChecked: false, onChanged: (value) {
+
                    acceptTerms = value;
                   }),
                 ),
