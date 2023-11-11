@@ -22,8 +22,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
   @override
   void initState() {
     // read product
-    product =
-        Provider.of<ProviderCart>(context, listen: false).selectedProduct;
+    product = Provider.of<ProviderCart>(context, listen: false).selectedProduct;
   }
 
   @override
@@ -40,7 +39,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
           Padding(
-            padding: EdgeInsets.only(top: 20, left: 8),
+            padding: const EdgeInsets.only(top: 20, left: 8),
             child: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios_rounded,
@@ -55,33 +54,41 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
           Row(
             children: [
               GestureDetector(
-                  onTap: () {
-                    Provider.of<ProviderProducts>(ctx, listen: false)
-                        .setCategoryIdsFilter([product.category.id]);
-                    ctx.go('/products');
-                  },
-                  child: Padding(
-                      padding: EdgeInsets.only(left: 45),
-                      child: Text(
-                        product.category.name,
-                        style: MyStyles.breadcrumb,
-                      ))),
-              const Padding(
-                padding: EdgeInsets.only(left: 8),
-                child: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 12,
-                  color: MyStyles.breadcrumbPurple,
+                    onTap: () {
+                      Provider.of<ProviderProducts>(ctx, listen: false)
+                          .setCategoryIdsFilter([product.category.id]);
+                      ctx.go('/products');
+                    },
+                    child: Padding(
+                        padding: const EdgeInsets.only(left: 45),
+                        child: Text(
+                          product.category.name,
+                          style: MyStyles.breadcrumb,
+                          softWrap: true,
+                        ))),
+
+
+               const Padding(
+                  padding: EdgeInsets.only(left: 8),
+                  child: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 12,
+                    color: MyStyles.breadcrumbPurple,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                      padding: EdgeInsets.only(left: 8),
-                      child: Text(
-                        product.name,
-                        style: MyStyles.breadcrumb,
-                      ))),
+               SizedBox(
+                 width: 250,
+                 child: GestureDetector(
+                     onTap: () {},
+                     child: Padding(
+                         padding: const EdgeInsets.only(left: 8),
+                         child: Text(
+                           product.name,
+                           style: MyStyles.breadcrumb,
+                           overflow: TextOverflow.fade,
+                         ))),
+               )
+
             ],
           ),
           Padding(
@@ -93,7 +100,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
                       boxShadow: [
                         BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
@@ -112,9 +119,13 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                 ),
               )),
           Center(
-            child: Text(
-              product.name,
-              style: MyStyles.h3_black,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Text(
+                product.name,
+                style: MyStyles.h3_black,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           Padding(
@@ -124,6 +135,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
               child: Text(
                 product.description,
                 style: MyStyles.p,
+                textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -137,46 +149,50 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
             ),
           ),
           Visibility(
-              visible: !Provider.of<ProviderCart>(ctx, listen: false).isProductScanned,
+              visible: !Provider.of<ProviderCart>(ctx, listen: false)
+                  .isProductScanned,
               child: Center(
-                child: SizedBox(
-                  width: 150,
-                  child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 10, left: 5, bottom: 25),
-                      child: Column(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 5, bottom: 25),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            children: [
-                              const Text(
-                                "Pasillo: ",
-                                style: MyStyles.h4_orange,
-                              ),
-                              Text(
-                                product.aisle.name,
-                                style: const TextStyle(fontSize: 16),
-                              )
-                            ],
+                          const Text(
+                            "Pasillo: ",
+                            style: MyStyles.h4_orange,
                           ),
-                          Row(
-                            children: [
-                              const Text(
-                                "Stock: ",
-                                style: MyStyles.h4_orange,
-                              ),
-                              Text(
-                                "  ${product.stock}",
-                                style: const TextStyle(fontSize: 16),
-                              )
-                            ],
-                          ),
+                          Text(
+                            product.aisle.name,
+                            style: const TextStyle(fontSize: 16),
+                          )
                         ],
-                      )),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Stock: ",
+                            style: MyStyles.h4_orange,
+                          ),
+                          Text(
+                            "  ${product.stock}",
+                            style: const TextStyle(fontSize: 16),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               )),
           Visibility(
-            visible:
-                true, //Provider.of<ProviderCart>(ctx, listen: false).isProductScanned,
+            visible:true,
+                //Provider.of<ProviderCart>(ctx, listen: false).isProductScanned,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -188,98 +204,98 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 15),
-                    child: Column(
-                      children: [
-                        Visibility(
-                            visible: !Provider.of<ProviderCart>(ctx, listen: false)
-                                .isProductInCart,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                  setState(() {
-                                    Provider.of<ProviderCart>(ctx, listen: false)
-                                        .addDetail(widget.quantity.toDouble());
-                                  });
-                                },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                    side: const BorderSide(
-                                        width: 1, color: MyStyles.orange),
-                                  ),
+                    child: Column(children: [
+                      Visibility(
+                          visible:
+                              !Provider.of<ProviderCart>(ctx, listen: false)
+                                  .isProductInCart,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                Provider.of<ProviderCart>(ctx, listen: false)
+                                    .addDetail(widget.quantity.toDouble());
+                              });
+                            },
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  side: const BorderSide(
+                                      width: 1, color: MyStyles.orange),
                                 ),
-                                backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
                               ),
-                              child: const Column(
-                                children: [
-                                  SizedBox(
-                                    width: 275,
-                                    height: 55,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.shopping_cart_outlined,
-                                          size: 24.0,
-                                          color: MyStyles.orange,
-                                        ),
-                                        Text(
-                                          "Agregar al carrito",
-                                          style: TextStyle(color: MyStyles.orange),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )),
-                        Visibility(
-                            visible: Provider.of<ProviderCart>(ctx, listen: false).isProductInCart,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                //
-                              },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
-
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                            ),
+                            child: const Column(
+                              children: [
+                                SizedBox(
+                                  width: 275,
+                                  height: 55,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.shopping_cart_outlined,
+                                        size: 24.0,
+                                        color: MyStyles.orange,
+                                      ),
+                                      Text(
+                                        "Agregar al carrito",
+                                        style:
+                                            TextStyle(color: MyStyles.orange),
+                                      ),
+                                    ],
                                   ),
+                                )
+                              ],
+                            ),
+                          )),
+                      Visibility(
+                          visible: Provider.of<ProviderCart>(ctx, listen: false)
+                              .isProductInCart,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              //
+                            },
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
                                 ),
-                                backgroundColor:
-                                MaterialStateProperty.all(MyStyles.orange),
                               ),
-                              child: const Column(
-                                children: [
-                                  SizedBox(
-                                    width: 275,
-                                    height: 55,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.check_rounded,
-                                          size: 24.0,
-                                          color: Colors.white,
-                                        ),
-                                        Text(
-                                          "Añadido al carrito",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ))
-                      ]
-                    ),
+                              backgroundColor:
+                                  MaterialStateProperty.all(MyStyles.orange),
+                            ),
+                            child: const Column(
+                              children: [
+                                SizedBox(
+                                  width: 275,
+                                  height: 55,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.check_rounded,
+                                        size: 24.0,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        "Añadido al carrito",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ))
+                    ]),
                   ),
-
                 ]),
           )
         ]));

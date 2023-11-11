@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:multi_screen_app/src/providers/ProviderCart.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:multi_screen_app/src/ui/widgets/WidgetCartProduct.dart';
@@ -115,7 +116,20 @@ class ScreenCart extends StatelessWidget {
             });
             return Column(children: addedProducts);
           }
-        })
+        }),
+
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20, top: 10, ),
+          child: Center(
+            child: ElevatedButton(
+              onPressed: () {
+                ctx.push('/cart/pay');
+              },
+              style: MyStyles.buttonStyle,
+              child: const Text("Pagar"),
+            ),
+          ),
+        )
       ],
     ));
   }

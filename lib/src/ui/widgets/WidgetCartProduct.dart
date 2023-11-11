@@ -81,27 +81,30 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5, left: 15),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Q ${widget.price} ',
-                          style: MyStyles.price,
-                        ),
-                        Text(
-                          'x ${widget.quatity}',
-                          style: TextStyle(color: MyStyles.orange, fontSize: 11, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    )
-                  )
+                      padding: const EdgeInsets.only(top: 5, left: 15),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Q ${widget.price} ',
+                            style: MyStyles.price,
+                          ),
+                          Text(
+                            'x ${widget.quatity}',
+                            style: TextStyle(
+                                color: MyStyles.orange,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ))
                 ],
               ),
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               IconButton(
                   onPressed: () {
-                    Provider.of<ProviderCart>(ctx, listen: false).removeAt(widget.index);
+                    Provider.of<ProviderCart>(ctx, listen: false)
+                        .removeAt(widget.index);
                   },
                   icon: const Icon(
                     Icons.close,
