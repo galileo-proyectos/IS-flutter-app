@@ -38,9 +38,6 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
                 case 2:
                   ctx.go('/cart');
                   break;
-                case 3:
-                  ctx.go('/user');
-                  break;
               }
             },
             indicatorColor: Colors.transparent,
@@ -70,12 +67,6 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
               NavigationDestination(
                 selectedIcon: Icon(Icons.home),
                 icon: Icon(Icons.shopping_cart_outlined,
-                    color: MyStyles.purple, size: 30),
-                label: '',
-              ),
-              NavigationDestination(
-                selectedIcon: Icon(Icons.home),
-                icon: Icon(Icons.person_2_outlined,
                     color: MyStyles.purple, size: 30),
                 label: '',
               ),

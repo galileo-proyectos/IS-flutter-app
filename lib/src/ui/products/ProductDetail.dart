@@ -208,7 +208,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                     },
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 15),
+                    padding: const EdgeInsets.only(bottom: 15),
                     child: Column(children: [
                       Visibility(
                           visible:

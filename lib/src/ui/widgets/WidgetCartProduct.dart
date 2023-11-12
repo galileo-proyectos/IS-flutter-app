@@ -28,7 +28,7 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
   void initState() {}
   Widget build(BuildContext ctx) {
     return Padding(
-      padding: EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
+      padding: const EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 115,
@@ -49,7 +49,7 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(left: 15),
               child: Container(
                 width: 80,
                 height: 80,
@@ -90,7 +90,7 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
                           ),
                           Text(
                             'x ${widget.quatity}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: MyStyles.orange,
                                 fontSize: 11,
                                 fontWeight: FontWeight.w500),

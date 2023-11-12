@@ -16,6 +16,7 @@ import 'package:multi_screen_app/src/ui/auth/SignUpSuccess.dart';
 import 'package:multi_screen_app/src/ui/auth/UserRecovery.dart';
 import 'package:multi_screen_app/src/ui/cart/Cart.dart';
 import 'package:multi_screen_app/src/ui/cart/CartCompleted.dart';
+import 'package:multi_screen_app/src/ui/cart/PaySuccess.dart';
 import 'package:multi_screen_app/src/ui/products/ProductDetail.dart';
 import 'package:multi_screen_app/src/ui/cart/Scanner.dart';
 import 'package:multi_screen_app/src/ui/Home.dart';
@@ -29,7 +30,7 @@ import 'package:multi_screen_app/src/ui/widgets/WidgetBottomNavigationBar.dart';
 import 'package:provider/provider.dart';
 
 class MyRoutes {
-  static const _initialLocation = '/cart/pay';
+  static const _initialLocation = '/splash';
 
   static final GoRouter _routes = GoRouter(
     initialLocation: _initialLocation,
@@ -81,8 +82,8 @@ class MyRoutes {
                 routes: [
                   GoRoute(
                     path: 'pay',
-                      builder: (context, state) => const ScreenPay()
-                  )
+                      builder: (context, state) => const ScreenPay(),
+                  ),
                 ]
               ),
               GoRoute(
@@ -106,6 +107,10 @@ class MyRoutes {
       ShellRoute(
         builder: _authLayout,
         routes: [
+          GoRoute(
+              path: '/cart/pay/success',
+              builder: (context, state) => const ScreenPaySuccess()
+          ),
           GoRoute(
             path: '/auth/signIn',
             builder: (context, state) => ScreenSignIn()

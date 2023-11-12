@@ -21,7 +21,7 @@ class ScreenCart extends StatelessWidget {
               style: MyStyles.h2,
             )),
         Padding(
-            padding: EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
+            padding: const EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
             child: Container(
                 width: MediaQuery.of(ctx).size.width,
                 height: 125,
@@ -38,7 +38,7 @@ class ScreenCart extends StatelessWidget {
                   ],
                 ),
                 child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       children: [
                         Row(children: [
@@ -51,17 +51,21 @@ class ScreenCart extends StatelessWidget {
                                   alignment: Alignment.centerRight,
                                   child: Text(
                                       "Q ${Provider.of<ProviderCart>(ctx, listen: false).cart.total.toStringAsFixed(2)}",
-                                      style: const TextStyle(color:  Color(0xFF414141)))))
+                                      style: const TextStyle(
+                                          color: Color(0xFF414141)))))
                         ]),
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 5),
                           child: Row(children: [
-                            Text("Descuentos", style: TextStyle(color:  Color(0xFF414141))),
+                            Text("Descuentos",
+                                style: TextStyle(color: Color(0xFF414141))),
                             Expanded(
                                 child: Align(
                                     alignment: Alignment.centerRight,
-                                    child:
-                                        Text("Q 66.55", style: TextStyle(color:  Color(0xFF414141))) //Cambiar por descuentos
+                                    child: Text("Q 66.55",
+                                        style: TextStyle(
+                                            color: Color(
+                                                0xFF414141))) //Cambiar por descuentos
                                     ))
                           ]),
                         ),
@@ -117,19 +121,36 @@ class ScreenCart extends StatelessWidget {
             return Column(children: addedProducts);
           }
         }),
-
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20, top: 10, ),
-          child: Center(
-            child: ElevatedButton(
-              onPressed: () {
-                ctx.push('/cart/pay');
-              },
-              style: MyStyles.buttonStyle,
-              child: const Text("Pagar"),
-            ),
-          ),
-        )
+        const Visibility(
+          visible: false,
+          child: Padding(
+              padding: EdgeInsets.all(25),
+              child: Text(
+                "Empieza a agregar productos a tu carrito",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 21,
+                    color: Color(0xFF727272)),
+              )),
+        ),
+        Visibility(
+            visible: true,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: 20,
+                top: 10,
+              ),
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    ctx.push('/cart/pay');
+                  },
+                  style: MyStyles.buttonStyle,
+                  child: const Text("Pagar"),
+                ),
+              ),
+            ))
       ],
     ));
   }

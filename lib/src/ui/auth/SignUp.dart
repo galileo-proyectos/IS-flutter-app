@@ -228,7 +228,7 @@ class ScreenSignUp extends StatelessWidget {
             ),
             Center(
                 child: ElevatedButton(
-                    child: Text('Registrarse'),
+                    child: const Text('Registrarse'),
                     style: MyStyles.buttonStyle,
                     onPressed: () async {
                       String? errMessage="";

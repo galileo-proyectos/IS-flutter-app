@@ -50,36 +50,24 @@ class _ScreenProductListState extends State<ScreenProductList> {
                                       listen: false)
                                   .fetchProducts();
                             })))),
-            const Flexible(
+           Flexible(
                 flex: 1,
-                child:Padding(padding: EdgeInsets.only(left: 10, top: 10),
-                  child: Icon(
-                    Icons.search_rounded,
-                    color: MyStyles.orange,
-                    size: 35,
-                  ))
+                child: Padding(padding: const EdgeInsets.only(left: 10, top: 10),
+                  child: IconButton(
+                      icon: const Icon(Icons.filter_alt,
+                          size: 25, color: MyStyles.orange),
+                      onPressed: () {
+                        // Provider.of<ProviderProducts>(ctx, listen: false).fetchProducts();
+                        Provider.of<ProviderProducts>(ctx, listen: false)
+                            .setShowFilters(true);
+
+                        // hide keyboard
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      }))
             ),
           ]),
-          Container(
-            color: Colors.transparent,
-            width: MediaQuery.of(ctx).size.width,
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 5,),
-              child: IconButton(
-                  icon: const Icon(Icons.filter_alt,
-                      size: 25, color: MyStyles.orange),
-                  onPressed: () {
-                    // Provider.of<ProviderProducts>(ctx, listen: false).fetchProducts();
-                    Provider.of<ProviderProducts>(ctx, listen: false)
-                        .setShowFilters(true);
-
-                    // hide keyboard
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    FocusManager.instance.primaryFocus?.unfocus();
-                  }),
-            )
-          ),
+          
           Consumer<ProviderProducts>(builder: (ctx, provider, child) {
             if (provider.isLoading()) {
               // here you can show a loading status
@@ -129,7 +117,8 @@ class _ScreenProductListState extends State<ScreenProductList> {
                           crossAxisCount: 2,
                           children: widgetList)));
             }
-          })
+          }),
+          const Padding(padding: EdgeInsets.all(10))
         ]));
   }
 }
