@@ -1,6 +1,6 @@
 class BaseAPI {
   // [Q] how can I set ENV variables????
-  static const String authority = 'scango.alssdev.com';
+  static const String authority = '10.0.2.2:3555';
   static const _api = '/api/v1';
 
   static const headers = <String, String> {
@@ -13,7 +13,8 @@ class BaseAPI {
     'categories': '$_api/categories',
     'password-recovery': '$_api/password-recovery/send-email',
     'products': '$_api/products',
-    'promotions': '$_api/promotions'
+    'promotions': '$_api/promotions',
+    'cart': '$_api/cart'
   };
 
   static Map<String, String> authHeaders (String token) {

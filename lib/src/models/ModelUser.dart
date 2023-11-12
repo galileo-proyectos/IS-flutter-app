@@ -1,7 +1,7 @@
 class ModelUser {
   final String _token;
 
-  ModelUser.notSignedIn(): _token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJBbGVzc2FuZHJvLm1vcmFsZXNAZ2FsaWxlby5lZHUiLCJpYXQiOjE2OTY5NDczNzF9.gkdti8fB3Isw2oTrj0lJoU70Mn1-Tj73eqSLasO5lHQ'; // named constructor
+  ModelUser.notSignedIn(): _token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhbGVzc2FuZHJvLm1vcmFsZXNAZ2FsaWxlby5lZHUiLCJzdHJpcGVVc2VySWQiOiJjdXNfT3pIcEJORUJCVmM4eHgiLCJpYXQiOjE2OTk3NTAxNDh9.tBNm7mCnoFeF2766bTYQJHOwcW8MrpyJ3eOKR6Tt-w4'; // named constructor
   ModelUser(this._token);
 
   String get token => _token;
