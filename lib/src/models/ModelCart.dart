@@ -11,6 +11,11 @@ class ModelCart {
   double _discount = 0;
   double _total = 0;
 
+  void emptyCart () {
+    _details.clear();
+    _total = 0;
+  }
+
   // details
   List<CartDetail> get details => _details;
   void addDetail (ModelProduct product, double quantity) {

@@ -47,6 +47,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   flutter_secure_storage: ^9.0.0
   flutter_stripe: ^9.5.0+1
+  simple_barcode_scanner: ^0.0.8
 
 dev_dependencies:
   flutter_test:

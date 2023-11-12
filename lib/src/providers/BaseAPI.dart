@@ -13,7 +13,8 @@ class BaseAPI {
     'categories': '$_api/categories',
     'password-recovery': '$_api/password-recovery/send-email',
     'products': '$_api/products',
-    'promotions': '$_api/promotions'
+    'promotions': '$_api/promotions',
+    'cart': '$_api/cart'
   };
 
   static Map<String, String> authHeaders (String token) {
