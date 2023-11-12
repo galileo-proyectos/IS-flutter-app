@@ -51,47 +51,52 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
               },
             ),
           ),
-          Row(
-            children: [
-              GestureDetector(
+              Row(
+                children: [
+                  GestureDetector(
                     onTap: () {
                       Provider.of<ProviderProducts>(ctx, listen: false)
                           .setCategoryIdsFilter([product.category.id]);
                       ctx.go('/products');
                     },
                     child: Padding(
-                        padding: const EdgeInsets.only(left: 45),
-                        child: Text(
-                          product.category.name,
-                          style: MyStyles.breadcrumb,
-                          softWrap: true,
-                        ))),
-
-
-               const Padding(
-                  padding: EdgeInsets.only(left: 8),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 12,
-                    color: MyStyles.breadcrumbPurple,
+                      padding: const EdgeInsets.only(left: 45),
+                      child: Text(
+                        product.category.name,
+                        style: MyStyles.breadcrumb,
+                        softWrap: true,
+                      ),
+                    ),
                   ),
-                ),
-               SizedBox(
-                 width: 250,
-                 child: GestureDetector(
-                     onTap: () {},
-                     child: Padding(
-                         padding: const EdgeInsets.only(left: 8),
-                         child: Text(
-                           product.name,
-                           style: MyStyles.breadcrumb,
-                           overflow: TextOverflow.fade,
-                         ))),
-               )
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8),
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 12,
+                      color: MyStyles.breadcrumbPurple,
+                    ),
+                  ),
+                  Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 250,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Text(
+                          product.name,
+                          style: MyStyles.breadcrumb,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
 
-            ],
-          ),
-          Padding(
+
+              Padding(
               padding: const EdgeInsets.all(20),
               child: Center(
                 child: Container(

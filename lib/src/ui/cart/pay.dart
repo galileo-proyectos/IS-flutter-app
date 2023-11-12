@@ -16,7 +16,7 @@ class ScreenPay extends StatelessWidget {
             child: ElevatedButton(
               child: const Text('Go back'),
               onPressed: () {
-                ctx.go('/cart');
+                ctx.go('/');
               },
             )
         )
