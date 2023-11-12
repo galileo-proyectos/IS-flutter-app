@@ -1,6 +1,11 @@
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/providers/ProviderCart.dart';
+import 'package:multi_screen_app/src/providers/ProviderProducts.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
+import 'package:multi_screen_app/src/ui/widgets/WidgetMessageBox.dart';
+import 'package:provider/provider.dart';
 
 class WidgetBottomNavigationBar extends StatefulWidget {
   const WidgetBottomNavigationBar({super.key});
@@ -33,7 +38,7 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
                   ctx.go('/');
                   break;
                 case 1:
-                  ctx.go('/scanner');
+                  _scanCode(ctx);
                   break;
                 case 2:
                   ctx.go('/cart');
@@ -82,5 +87,38 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
             ],
           ),
         ));
+  }
+
+  void _scanCode (BuildContext ctx) async {
+    late final result;
+    try {
+      result = await BarcodeScanner.scan();
+    } catch (e) {
+      if (ctx.mounted) {
+        WidgetMessageBox.openError(ctx, 'Ocurrió un error, vuelva a intentarlo.', Colors.red);
+      }
+      return;
+    }
+
+    if (ctx.mounted) {
+      if (result.type == ResultType.Barcode) {
+        final product = await Provider.of<ProviderProducts>(ctx, listen: false).fetchProduct(result.rawContent);
+
+        if (ctx.mounted) {
+          if (product != null) {
+            Provider.of<ProviderCart>(ctx, listen: false).selectProduct(product, isScanned: true);
+            ctx.go('/products/details');
+          } else {
+            WidgetMessageBox.openError(ctx, 'No se encontró el producto', Colors.red);
+            _scanCode(ctx);
+          }
+        }
+      } else if (result.type == ResultType.Cancelled) {
+        ctx.go('/');
+      } else if (result.type == ResultType.Error) {
+        ctx.go('/');
+        WidgetMessageBox.openError(ctx, 'Ocurrió un error al leer el código de barras', Colors.red);
+      }
+    }
   }
 }
