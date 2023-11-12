@@ -1,6 +1,6 @@
 class BaseAPI {
   // [Q] how can I set ENV variables????
-  static const String authority = '10.0.2.2:3555';
+  static const String authority = 'scango.alssdev.com';
   static const _api = '/api/v1';
 
   static const headers = <String, String> {

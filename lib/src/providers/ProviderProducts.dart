@@ -36,7 +36,7 @@ class ProviderProducts extends DefaultProvider {
 
     // fetch
     final http.Response httpResult = await http.get(
-        Uri.http(BaseAPI.authority, BaseAPI.routes['products']!, queryParams.isNotEmpty ? queryParams : null),
+        Uri.https(BaseAPI.authority, BaseAPI.routes['products']!, queryParams.isNotEmpty ? queryParams : null),
         headers: BaseAPI.authHeaders(user.token)
     );
 

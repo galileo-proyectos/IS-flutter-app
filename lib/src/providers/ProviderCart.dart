@@ -81,7 +81,7 @@ class ProviderCart extends DefaultProvider {
 
     // fetch
     final http.Response httpResult = await http.post(
-        Uri.http(BaseAPI.authority, '${BaseAPI.routes['cart']}/payment_intent'),
+        Uri.https(BaseAPI.authority, '${BaseAPI.routes['cart']}/payment_intent'),
         headers: BaseAPI.authHeaders(user.token),
         body: jsonEncode(<String, double> {
           'total': _cart.total
