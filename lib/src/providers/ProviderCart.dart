@@ -18,6 +18,7 @@ class ProviderCart extends DefaultProvider {
   ProviderCart(super.ctx);
 
   ModelCart get cart => _cart;
+  double _discount = 0;
 
   List<CartDetail> get details => _cart.details;
 
@@ -26,24 +27,26 @@ class ProviderCart extends DefaultProvider {
     if (!isInCart(_selectedProduct!)) {
       _cart.addDetail(_selectedProduct!, quantity);
       _isProductInCart = true;
-      notifyListeners();
+      fetchDiscount();
     }
   }
   void removeAt (int index) {
     _cart.removeAt(index);
-    notifyListeners();
+    fetchDiscount();
   }
   void emptyCart () {
     _cart.emptyCart();
+    _discount = 0;
     notifyListeners();
   }
   void updateQuantityAt (int index, double quantity) {
     _cart.updateQuantityAt(index, quantity);
-    notifyListeners();
+    fetchDiscount();
   }
   bool isInCart (ModelProduct product) {
     return _cart.isInCart(product);
   }
+  // ====================
 
   // === selected product methods ===
   bool get isProductScanned => _isProductScanned;
@@ -65,16 +68,6 @@ class ProviderCart extends DefaultProvider {
     _isProductInCart = false;
   }
   // ================================
-
-  void setConsumer (String businessName, String nit) {
-    _cart.setConsumer(businessName, nit);
-    notifyListeners();
-  }
-
-  void setCard (String cardHolder, String number, String date, String ccv) {
-    _cart.setCard(cardHolder, number, date, ccv);
-    notifyListeners();
-  }
 
   Future<ModelPaymentIntent?> fetchPaymentIntent () async {
     onLoading();
@@ -98,5 +91,29 @@ class ProviderCart extends DefaultProvider {
     } else {
       return null;
     }
+  }
+
+  double get total => _cart.total;
+  double get discount => _discount;
+  double get newTotal => _cart.total - _discount;
+  Future<ModelPaymentIntent?> fetchDiscount () async {
+    onLoading();
+
+    // fetch
+    final http.Response httpResult = await http.post(
+        Uri.https(BaseAPI.authority, '${BaseAPI.routes['cart']}/calc_discount'),
+        headers: BaseAPI.authHeaders(user.token),
+        body: _cart.toJson()
+    );
+
+    // parse http result
+    final ApiResponse response = ApiResponse.fromJson(jsonDecode(httpResult.body));
+
+    // convert to list
+    offLoading();
+    if (response.isSuccess()) {
+      _discount = response.results.toDouble();
+    }
+    notifyListeners();
   }
 }

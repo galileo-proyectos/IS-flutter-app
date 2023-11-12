@@ -1,14 +1,10 @@
 import 'dart:convert';
-
 import 'package:multi_screen_app/src/models/ModelProduct.dart';
 
 class ModelCart {
   ModelCart();
 
-  CartConsumer _consumer = CartConsumer.defaultConsumer;
-  CartCard _card = CartCard.defaultCard;
   final List<CartDetail> _details = [];
-  double _discount = 0;
   double _total = 0;
 
   void emptyCart () {
@@ -45,23 +41,14 @@ class ModelCart {
     return false;
   }
 
-  bool hasConsumer () => _consumer != CartConsumer.defaultConsumer;
-  bool hasCard () => _card != CartCard.defaultCard;
-
-  // consumer
-  CartConsumer get consumer => _consumer;
-  void setConsumer (String businessName, String nit) {
-    _consumer = CartConsumer(businessName, nit);
-  }
-
-  // card
-  CartCard? get card => _card;
-  void setCard (String cardHolder, String number, String date, String ccv) {
-    _card = CartCard(cardHolder, number, date, ccv);
+  @override
+  String toJson () {
+    return jsonEncode(<String, dynamic> {
+      'details': _details
+    });
   }
 
   // total
-  double get discount => _discount;
   double get total => _total;
 }
 
@@ -71,12 +58,13 @@ class CartDetail {
 
   CartDetail(this._product, this._quantity);
 
-  String toJSON () {
-    return jsonEncode(<String, dynamic> {
+  @override
+  Map<String, dynamic> toJson () {
+    return <String, dynamic> {
       'productCode': _product.code,
       'price': _product.price,
-      'amount': _quantity
-    });
+      'quantity': _quantity
+    };
   }
 
   // getters and setters
@@ -86,29 +74,4 @@ class CartDetail {
   void setQuantity (double quantity) {
     _quantity = quantity;
   }
-}
-
-class CartCard {
-  final String _cardHolder;
-  final String _number;
-  final String _date;
-  final String _ccv;
-
-  static const defaultCard = CartCard('', '', '', '');
-
-  const CartCard(this._cardHolder, this._number, this._date, this._ccv);
-
-// this class is pending to be change...
-}
-
-class CartConsumer {
-  final String _businessName;
-  final String _nit;
-
-  static const CartConsumer defaultConsumer = CartConsumer('', '');
-
-  const CartConsumer(this._businessName, this._nit);
-
-  String get businessName => _businessName;
-  String get nit => _nit;
 }
