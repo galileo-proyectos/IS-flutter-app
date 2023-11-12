@@ -111,9 +111,7 @@ class ScreenCart extends StatelessWidget {
             List<Widget> addedProducts = [];
             provider.details.asMap().forEach((index, addedProduct) {
               addedProducts.add(WidgetCartProduct(
-                imageURL: addedProduct.product.imageURL,
-                name: addedProduct.product.name,
-                price: addedProduct.product.price,
+                product: addedProduct.product,
                 index: index,
                 quatity: addedProduct.quantity,
               ));

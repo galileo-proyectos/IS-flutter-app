@@ -15,6 +15,7 @@ class WidgetBottomNavigationBar extends StatefulWidget {
 
 class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
   @override
+  int currentPageIndex = 0;
   Widget build(BuildContext ctx) {
     return Container(
         height: 70,
@@ -33,6 +34,9 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
           ),
           child: NavigationBar(
             onDestinationSelected: (int index) {
+              setState(() {
+                currentPageIndex = index;
+              });
               switch (index) {
                 case 0:
                   ctx.go('/');
@@ -45,16 +49,17 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
                   break;
               }
             },
-            indicatorColor: Colors.transparent,
+            selectedIndex: currentPageIndex,
+            indicatorColor: MyStyles.orange,
             destinations: const <Widget>[
               NavigationDestination(
                 selectedIcon: Icon(
                   Icons.home,
-                  color: MyStyles.purple,
+                  color: Colors.white,
                   size: 30,
                 ),
                 icon: Icon(
-                  Icons.home,
+                  Icons.home_outlined,
                   color: MyStyles.purple,
                   size: 30,
                 ),
@@ -62,7 +67,8 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
               ),
               NavigationDestination(
                 selectedIcon: Icon(
-                  Icons.home,
+                  Icons.barcode_reader,
+                  color: Colors.white,
                   size: 30,
                 ),
                 icon: Icon(Icons.barcode_reader,
@@ -70,7 +76,7 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar>{
                 label: '',
               ),
               NavigationDestination(
-                selectedIcon: Icon(Icons.home),
+                selectedIcon: Icon(Icons.shopping_cart, color: Colors.white,),
                 icon: Icon(Icons.shopping_cart_outlined,
                     color: MyStyles.purple, size: 30),
                 label: '',

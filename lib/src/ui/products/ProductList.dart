@@ -106,6 +106,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
                       ctx.push('/products/details');
                     }));
               }
+              widgetList.add(const Padding(padding: EdgeInsets.all(15)));
 
               return Expanded(
                   child: Padding(
@@ -118,7 +119,7 @@ class _ScreenProductListState extends State<ScreenProductList> {
                           children: widgetList)));
             }
           }),
-          const Padding(padding: EdgeInsets.all(10))
+
         ]));
   }
 }

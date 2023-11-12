@@ -10,7 +10,6 @@ class ScreenPay extends StatefulWidget {
   const ScreenPay({super.key});
 
   @override
-
   State<ScreenPay> createState() => _ScreenPayState();
 }
 
@@ -32,9 +31,11 @@ class _ScreenPayState extends State<ScreenPay> {
     super.dispose();
   }
 
-  void _handlePayPress () async {
+  void _handlePayPress() async {
     try {
-      final paymentIntent = await Provider.of<ProviderCart>(context, listen: false).fetchPaymentIntent();
+      final paymentIntent =
+          await Provider.of<ProviderCart>(context, listen: false)
+              .fetchPaymentIntent();
 
       if (paymentIntent != null) {
         await Stripe.instance.confirmPayment(
@@ -42,17 +43,12 @@ class _ScreenPayState extends State<ScreenPay> {
             data: const PaymentMethodParams.card(
                 paymentMethodData: PaymentMethodData(
                     billingDetails: BillingDetails(
-                      email: 'alessandro.morales@galileo.edu',
-                    )
-                )
-            )
-        );
+              email: 'alessandro.morales@galileo.edu',
+            ))));
 
         Provider.of<ProviderCart>(context, listen: false).emptyCart();
         // [P] go to confirmation
-        print('Me debes ');
         context.go('/cart/pay/success');
-
       } else {
         // [P] show generic error
       }
@@ -63,47 +59,62 @@ class _ScreenPayState extends State<ScreenPay> {
       // [P] generic error error message
       print("catch");
     }
-
   }
 
   @override
-  Widget build (BuildContext ctx) {
-    return Center(
-
-      child: Column(
-        children: [
-          CardFormField(
-            controller: controller,
-            countryCode: 'GT',
-            enablePostalCode: false,
+  Widget build(BuildContext ctx) {
+    return SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+          const Padding(padding: EdgeInsets.only(top:25, left: 25, bottom: 25),
+          child: Text(
+            "Formulario de Pago",
+            style: MyStyles.h2,
+          ),),
+          Padding(
+            padding: const EdgeInsets.only(left: 25, right: 25),
+            child: CardFormField(
+              autofocus: true,
+              controller: controller,
+              countryCode: 'GT',
+              enablePostalCode: false,
+              style: CardFormStyle(
+                  borderRadius: 10,
+                  placeholderColor: MyStyles.breadcrumbPurple),
+            ),
           ),
           Visibility(
               visible: controller.details.complete,
-              child: ElevatedButton(
+              child: Center(
+                child: ElevatedButton(
                   onPressed: _handlePayPress,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: MyStyles.orange,
+                    minimumSize: const Size(120, 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    // background
+                  ),
                   child: const Text('Pagar'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: MyStyles.orange,
-                  minimumSize: const Size(120, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  // background
-                ),
+                )
               )),
           Visibility(
               visible: !controller.details.complete,
-              child: ElevatedButton(
-                  onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFE5E5E5),
-                  minimumSize: const Size(120, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  // background
-                ),
-                  child: const Text('Pagar'),
-
+              child: Center(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFE5E5E5),
+                      minimumSize: const Size(120, 50),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      // background
+                    ),
+                    child: const Text('Pagar'),
+                  )
               ))
-        ]
-      )
-    );
+        ]));
   }
 }

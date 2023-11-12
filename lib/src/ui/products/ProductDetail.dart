@@ -196,8 +196,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                 ),
               )),
           Visibility(
-            visible:true,
-                //Provider.of<ProviderCart>(ctx, listen: false).isProductScanned,
+            visible:Provider.of<ProviderCart>(ctx, listen: false).isProductScanned,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,

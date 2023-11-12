@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:multi_screen_app/src/models/ModelProduct.dart';
 import 'package:multi_screen_app/src/providers/ProviderCart.dart';
 import 'package:multi_screen_app/src/ui/MyStyles.dart';
 import 'package:provider/provider.dart';
@@ -8,14 +10,10 @@ import 'package:provider/provider.dart';
 class WidgetCartProduct extends StatefulWidget {
   WidgetCartProduct(
       {super.key,
-      required this.imageURL,
-      required this.name,
-      required this.price,
+      required this.product,
       required this.index,
       required this.quatity});
-  String imageURL;
-  String name;
-  double price;
+  ModelProduct product;
   int index;
   double quatity;
 
@@ -59,7 +57,7 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
-                    widget.imageURL,
+                    widget.product.imageURL,
                     fit: BoxFit.cover,
                     color: Colors.black.withOpacity(0.1),
                     colorBlendMode: BlendMode.difference,
@@ -75,7 +73,7 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20, left: 15),
                     child: Text(
-                      widget.name,
+                      widget.product.name,
                       softWrap: true,
                       style: MyStyles.subtitle,
                     ),
@@ -85,7 +83,7 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
                       child: Row(
                         children: [
                           Text(
-                            'Q ${widget.price} ',
+                            'Q ${widget.product.price} ',
                             style: MyStyles.price,
                           ),
                           Text(
@@ -113,7 +111,12 @@ class _WidgetCartProduct extends State<WidgetCartProduct> {
                   )),
               const Expanded(child: Center()),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Provider.of<ProviderCart>(context, listen: false)
+                        .selectProduct(widget.product, isScanned: true);
+                    // the you can show it's details.
+                    ctx.push('/products/details');
+                  },
                   icon: const Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 15,
