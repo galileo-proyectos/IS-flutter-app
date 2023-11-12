@@ -262,7 +262,7 @@ class _ScreenProductDetailState extends State<ScreenProductDetail> {
                               .isProductInCart,
                           child: ElevatedButton(
                             onPressed: () {
-                              //
+                              Provider.of<ProviderCart>(ctx, listen: false).fetchDiscount();
                             },
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all(

@@ -49,23 +49,28 @@ class ScreenCart extends StatelessWidget {
                           Expanded(
                               child: Align(
                                   alignment: Alignment.centerRight,
-                                  child: Text(
-                                      "Q ${Provider.of<ProviderCart>(ctx, listen: false).cart.total.toStringAsFixed(2)}",
-                                      style: const TextStyle(
-                                          color: Color(0xFF414141)))))
+                                  child: Consumer<ProviderCart>(builder: (ctx, provider, _) {
+                                    return Text(
+                                        "Q ${provider.total.toStringAsFixed(2)}",
+                                        style: const TextStyle(
+                                            color: Color(0xFF414141)));
+                                  })
+                          ))
                         ]),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Row(children: [
-                            Text("Descuentos",
+                            const Text("Descuentos",
                                 style: TextStyle(color: Color(0xFF414141))),
                             Expanded(
                                 child: Align(
                                     alignment: Alignment.centerRight,
-                                    child: Text("Q 66.55",
-                                        style: TextStyle(
-                                            color: Color(
-                                                0xFF414141))) //Cambiar por descuentos
+                                    child: Consumer<ProviderCart>(builder: (ctx, provider, _) {
+                                      return Text(
+                                          "Q ${provider.discount.toStringAsFixed(2)}",
+                                          style: const TextStyle(
+                                              color: Color(0xFF414141)));
+                                    }) //Cambiar por descuentos
                                     ))
                           ]),
                         ),
@@ -73,18 +78,22 @@ class ScreenCart extends StatelessWidget {
                           color: MyStyles.orange,
                           thickness: 1.2,
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 5),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
                           child: Row(children: [
-                            Text(
+                            const Text(
                               "Total",
                               style: MyStyles.h4_black,
                             ),
                             Expanded(
                                 child: Align(
                                     alignment: Alignment.centerRight,
-                                    child: Text("Q 900.00",
-                                        style: MyStyles.h4_black)))
+                                    child: Consumer<ProviderCart>(builder: (ctx, provider, _) {
+                                      return Text(
+                                      "Q ${provider.newTotal.toStringAsFixed(2)}",
+                                      style: const TextStyle(
+                                      color: Color(0xFF414141)));
+                                      })))
                           ]),
                         ),
                       ],
