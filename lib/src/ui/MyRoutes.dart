@@ -62,10 +62,10 @@ class MyRoutes {
                   )
                 ]
               ),
-              GoRoute(
-                path: 'scanner',
-                builder: (context, state) => const ScreenScanner()
-              ),
+              // GoRoute(
+              //   path: 'scanner',
+              //   builder: (context, state) => const ScreenScanner()
+              // ),
               GoRoute(
                 path: 'purchases',
                 builder: (context, state) => const ScreenPurchaseHistory(),
